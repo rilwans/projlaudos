@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xml:lang="en" lang="en"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:head>
+	<title><ui:insert name="titulo">Laudos Medicos</ui:insert></title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="../../laudos/style.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+<h:body>
+	<h:panelGroup id="principal">
+	<p:growl id="messages" />
+	<div class="main">
+	<div class="head"></div>
+	<div class="menu" style="font-size: 10px"><ui:insert name="menu" >
+
+<div class="menubarra" >
+<div style="float:left">
+<h:form id="fmenu">
+ <p:commandButton value="Menu" onclick="dynaMenu.show();return false;"  />
+    <p:menu widgetVar="dynaMenu" position="dynamic" context="'form:dynamicPosition','tl','br'">
+    	<p:submenu >
+             <p:menuitem value="Inicio" url="../../laudos/index.xhtml"/>
+			 <p:menuitem value="Sair" action="#{loginComp.logout}" ajax="true" update="fmenu,dynaMenu,principal"/>
+         </p:submenu>
+         <p:submenu label="Cadastro">
+             <p:menuitem value="Modelo" update="messages" url="../../laudos/xhtml/lstmodelos.xhtml"/>
+             <p:menuitem value="Convenio" update="messages"  url="../../laudos/xhtml/cadconvenio.xhtml"/>
+         </p:submenu>
+         <p:submenu label="Laudos">
+             <p:menuitem value="Novo Laudo" update="messages" url="../../laudos/xhtml/cadlaudo.xhtml"/>
+             <p:menuitem value="Listar Laudos" update="messages" url="../../laudos/xhtml/lstlaudos.xhtml"/>
+         </p:submenu>
+
+     </p:menu>
+		</h:form>
+	</div>
+<div style="float:right; height:76%; width: 300px">
+<h:form id="formLogin">
+<h:panelGroup id="loginPanel">
+	<c:if test="#{sessionScope==null or sessionScope['login']==null}">
+		<div>
+			<div style="float: left ; padding-top: 4px">
+				<h:outputLabel style="font-weight: bold" >Acesso:</h:outputLabel>
+				<h:inputText value="#{loginComp.login}" maxlength="40" style="width:70px;" />
+				<h:outputLabel style="font-weight: bold">Senha:</h:outputLabel>
+				<h:inputSecret value="#{loginComp.login}" maxlength="40" style="width:70px;" />
+			</div>
+			<div style="float:right;">
+			<p:commandButton value="Entrar" style=" float:right; "
+				 action="#{loginComp.login}" update="loginPanel" ajax="true" >
+			</p:commandButton>
+			</div>
+		</div>
+	</c:if>
+	<c:if test="#{sessionScope!=null and sessionScope['login']!=null}">
+		<div style="float: right;">
+			<div style="float: left ; padding-top: 4px">
+				<h:outputLabel style="font-weight: bold" >Bem vindo:</h:outputLabel>
+				<h:outputLabel style="padding-left: 10px" value="#{sessionScope['login']}" />
+				<p:commandLink style="padding-left: 10px" update="principal,loginPanel,content" value="Sair" ajax="true" action="#{loginComp.logout}"/>
+			</div>
+		</div>
+	</c:if>
+</h:panelGroup>
+</h:form>
+</div>
+</div>
+
+	</ui:insert></div>
+
+	<div id="content" style="padding-bottom: 5px">
+		<ui:insert name="corpo">template</ui:insert>
+	</div>
+
+	<div id="footer" style="text-align: right"><span>Laudos V
+		2.0 &nbsp;&copy;&nbsp; 2010</span></div>
+	</div>
+</h:panelGroup>
+</h:body>
+</html>

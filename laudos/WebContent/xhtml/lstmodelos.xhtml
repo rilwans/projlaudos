@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/template/template.xhtml">
+<ui:define name="corpo">
+<h:form prependId="false">
+
+	<div style="padding-top: 5px; padding-left: 20px; padding-right: 20px; padding-bottom: 20px">
+
+	<div>
+		<div class="title">Modelos Cadastrados</div>
+	</div>
+
+	<div class="linha">
+    <p:dataTable var="laudo" value="#{laudoComp.laudos}" paginator="true" rows="10">
+
+         <p:column style="width: 18px">
+            <f:facet name="header">
+                <h:outputText value="Codigo" />
+            </f:facet>
+            <h:outputText value="#{laudo.idLaudo}" />
+        </p:column>
+
+        <p:column style="width: 50px">
+            <f:facet name="header">
+                <h:outputText value="Tipo de Laudo" />
+            </f:facet>
+            <h:outputText value="#{laudo.nmLaudo}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Modelo" />
+            </f:facet>
+
+            <h:outputText  value="#{laudo.laudoRed}" />
+        </p:column>
+
+ 		<p:column style="width:32px">
+            <p:commandButton update="display" style="font-size: 11px" oncomplete="laudoDialog.show()"
+                    image="ui-icon ui-icon-pencil">
+                <f:setPropertyActionListener value="#{laudo}"
+                    target="#{laudoComp.laudo}" />
+            </p:commandButton>
+        </p:column>
+
+    </p:dataTable>
+
+
+<p:dialog  header="Detalhe" widgetVar="laudoDialog" resizable="false"
+              width="800" showEffect="explode" hideEffect="explode">
+
+        <h:panelGrid id="display"  >
+
+
+		<div class="linha">
+				<h:inputHidden value="#{laudoComp.laudo.idLaudo}"/>
+				<div style="float: left ; padding-left: 20px">
+						<h:inputText value="#{laudoComp.laudo.nmLaudo}" maxlength="40" style="width:350px;">Descricao do Laudo
+						</h:inputText>
+				</div>
+		</div>
+			<div class="linha" >
+				<div style="float: left ; padding-left: 20px; padding-right: 20px">
+
+					<p:editor  value="#{laudoComp.laudo.laudo}" title="Modelo"
+					widgetVar="editor" width="100%" height="400px" />
+
+				</div>
+			</div>
+			<div >
+
+				<p:commandButton style="float:left; font-size: 11px" value="Salvar"
+					image="ui-icon ui-icon-disk"
+					actionListener="#{laudoComp.gravaLaudo}" onclick="editor.saveHTML()"
+					ajax="false" />
+
+			</div>
+        </h:panelGrid>
+    </p:dialog>
+
+</div>
+</div>
+</h:form>
+
+
+</ui:define>
+
+</ui:composition>
+
+
+
+</html>

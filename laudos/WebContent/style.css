@@ -1,0 +1,99 @@
+*{margin:0; padding:0;}
+
+.main{width:974px; margin:0 auto; text-align:left;}
+
+body{font-family:Verdana, Arial, Helvetica, sans-serif; color:#474747; font-size:0.6875em; line-height:1.36em; text-align:center;}
+
+
+
+/*=======header===========*/
+.menu{
+	height:20px;
+	text-align:left;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	background-repeat: no-repeat;
+	background-position: 16px top;
+}
+
+.title {
+
+	font-size: 16px;
+	font-style: italic;
+	letter-spacing: 2px;
+	float:left;
+	height:20px;
+	background-image: url("images/page_1_title_5.gif");
+	padding-top:2px;
+	text-align: center;
+	width: 100%
+}
+
+.menubarra{
+	float:left;
+	height:26px;
+	background-image: url("images/page_1_title_5.gif");
+	width: 100%
+
+}
+
+.head{
+	height:77px;
+	text-align:right;
+	background:url(images/header-bg.png) left top;
+	padding-top: 76px;
+	padding-right: 20px;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+
+.cad{
+	border: 1px ;
+	float :left;
+	font-size: 12px;
+	border-color: green;
+	margin-top: 5px;
+
+	}
+
+.cad .rodape{
+	height:10px;
+	float: left;
+	width: 100%
+	background:url(images/footer_bg.gif) left bottom repeat-x #F0F1ED;
+	}
+
+.linha{
+	float: left;
+	width: 100%;
+	padding-top: 3px
+
+	}
+
+.botao{
+	float: left;
+	width: 30%
+	}
+
+/*=====//header===========*/
+
+/*=======content===========*/
+#content{
+	float: left;
+	width: 100%;
+}
+
+
+/*=======footer===========*/
+#footer{
+	float:left;
+	width:100%;
+	background:url(images/footer_bg.gif) left bottom repeat-x #F0F1ED;
+	height:30px;
+	word-spacing:4px;
+	font-size:1.09em;
+	}
+/*=====//footer===========*/
+

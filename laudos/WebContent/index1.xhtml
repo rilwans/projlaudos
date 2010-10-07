@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:head>
+	<title>Teste</title>
+</h:head>
+<h:body>
+teste
+	<h3>Disc</h3>
+	<h:form id="form" >
+		<p:dataList value="#{testeDao.testes}" var="teste" itemType="disc">
+			<p:column>#{teste.idTeste}</p:column>
+			<p:column>#{teste.nmTeste}</p:column>
+			<p:column>
+				<p:column style="width:32px">
+
+					<p:commandLink update="form" value="remover" action="#{testeDao.excluiTeste}">
+						<f:setPropertyActionListener value="#{teste}"
+							target="#{testeDao.teste}" />
+					</p:commandLink>
+
+					<p:commandLink ajax="false" value="editar" action="#{testeDao.editarTeste}" >
+						<f:setPropertyActionListener value="#{teste}"
+							target="#{testeDao.teste}" />
+					</p:commandLink>
+
+				</p:column>
+			</p:column>
+		</p:dataList>
+	</h:form>
+	<h:form id="form2">
+
+		<h:inputText id="nmTeste" value="#{testeDao.teste.nmTeste}"></h:inputText>
+
+		<p:commandButton update="form,form2" value="ere" action="#{testeDao.opa}"></p:commandButton>
+
+	</h:form>
+
+
+	<h:form>
+
+		<h:commandButton value="editor" action="#{testeDao.chamaEditor}"></h:commandButton>
+
+	</h:form>
+
+
+	<h:form>
+
+		<h:commandButton value="editor" action="#{testeDao.modelo}"></h:commandButton>
+
+	</h:form>
+
+
+
+
+</h:body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/template/template.xhtml">
+<ui:define name="corpo">
+
+<div style="padding-top: 5px; padding-left: 20px; padding-right: 20px; padding-bottom: 20px">
+
+	<div>
+		<div class="title">Cadastro de Convenios</div>
+	</div>
+	<div class="linha">
+	<h:form id="tabConv" prependId="false">
+    <p:dataTable id="tabela" var="convenio" value="#{convenioComp.convenios}" paginator="true" rows="10">
+
+         <p:column style="width: 10%">
+            <f:facet name="header">
+                <h:outputText value="Codigo" />
+            </f:facet>
+            <h:outputText value="#{convenio.idConvenio}" />
+        </p:column>
+
+        <p:column style="width: 80%">
+            <f:facet name="header">
+                <h:outputText value="Nome do Convenio" />
+            </f:facet>
+            <h:outputText value="#{convenio.nmConvenio}" />
+        </p:column>
+
+		<p:column style="width:10%">
+            <p:commandButton update="display" oncomplete="convenioDialog.show()"
+                    image="ui-icon ui-icon-pencil">
+                <f:setPropertyActionListener value="#{convenio}"
+                    target="#{convenioComp.convenio}" />
+            </p:commandButton>
+            <p:commandButton update="tabConv,messages" ajax="true"
+                    image="ui-icon ui-icon-closethick" action="#{convenioComp.deleteConvenio}">
+                <f:setPropertyActionListener value="#{convenio}"
+                    target="#{convenioComp.convenio}" />
+            </p:commandButton>
+        </p:column>
+
+
+    </p:dataTable>
+
+    <p:dialog  header="Convenio" widgetVar="convenioDialog" resizable="false"
+              width="400" showEffect="explode" hideEffect="explode" >
+
+        <h:panelGrid id="display"  >
+
+
+		<div class="linha">
+				<h:inputHidden value="#{convenioComp.convenio.idConvenio}"/>
+				<div style="float: left ; padding-left: 20px">
+						<h:inputText  value="#{convenioComp.convenio.nmConvenio}" maxlength="40" style="width:200px;">Nome do Convenio
+						</h:inputText>
+				</div>
+		</div>
+
+			<div >
+
+				<p:commandButton style="float:left; font-size: 11px" value="Salvar"
+					actionListener="#{convenioComp.gravaConvenio}" update="tabela"
+					image="ui-icon-disk"
+					ajax="false" />
+
+			</div>
+        </h:panelGrid>
+    </p:dialog>
+
+    </h:form>
+    </div>
+
+<h:form>
+<div class="linha">
+			<div style="float:left">
+				<p:commandButton style="float:left; font-size: 11px" value="Novo" image="ui-icon-document"
+					update="displayNovo" oncomplete="convenioDialogNovo.show()">
+                <f:setPropertyActionListener value="#{convenio}"
+                    target="#{convenioComp.convenio}" />
+                    </p:commandButton>
+			</div>
+			</div>
+			<p:dialog  header="Novo Convenio" widgetVar="convenioDialogNovo" resizable="false"
+	              width="400" showEffect="explode" hideEffect="explode">
+
+		        <h:panelGrid id="displayNovo"  >
+
+					<div class="linha">
+							<h:inputHidden value="#{convenioComp.convenio.idConvenio}"/>
+							<div style="float: left ; padding-left: 20px">
+									<h:inputText  value="#{convenioComp.convenio.nmConvenio}" maxlength="40" style="width:200px;">Nome do Convenio
+									</h:inputText>
+							</div>
+					</div>
+						<div >
+							<p:commandButton style="float:left; font-size: 11px" value="Salvar"
+								actionListener="#{convenioComp.novoConvenio}" update="tabela"
+								image="ui-icon-disk"
+								ajax="false"  />
+						</div>
+		        </h:panelGrid>
+	    	</p:dialog>
+
+
+			</h:form>
+			</div>
+</ui:define>
+</ui:composition>
+</html>

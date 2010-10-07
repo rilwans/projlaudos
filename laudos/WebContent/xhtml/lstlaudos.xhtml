@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/template/template.xhtml">
+<ui:define name="corpo">
+
+<div style="padding-top: 5px; padding-left: 20px; padding-right: 20px; padding-bottom: 20px">
+
+	<div>
+		<div class="title">Laudos</div>
+	</div>
+
+	<div class="linha">
+		<h:form>
+
+    <p:dataTable var="paciente" value="#{pacienteComp.pacientes}" paginator="true" rows="10">
+
+		<p:column style="width: 10%"  filterBy="#{paciente.numero}">
+            <f:facet name="header">
+                <h:outputText  style="float:left;" value="N. Exame" />
+            </f:facet>
+            <h:outputText value="#{paciente.numero}" />
+        </p:column>
+
+        <p:column style="width: 60%" filterBy="#{paciente.nmPaciente}">
+            <f:facet  name="header">
+                <h:outputText style="float:left;" value="Nome" />
+            </f:facet>
+            <h:outputText value="#{paciente.nmPaciente}" />
+        </p:column>
+
+        <p:column style="width: 26%" filterBy="#{paciente.convenio.nmConvenio}">
+            <f:facet name="header">
+                <h:outputText style="float:left;" value="Convenio" />
+            </f:facet>
+            <h:outputText value="#{paciente.convenio.nmConvenio}" />
+        </p:column>
+
+        <p:column style="width:4%">
+            <p:commandButton style="font-size: 11px"
+                    image="ui-icon ui-icon-pencil" action="#{pacienteComp.editarLaudo}">
+                <f:setPropertyActionListener value="#{paciente.idPaciente}" target="#{pacienteComp.paciente.idPaciente}"/>
+            </p:commandButton>
+        </p:column>
+
+    </p:dataTable>
+
+
+
+</h:form>
+	</div>
+
+</div>
+</ui:define>
+</ui:composition>
+</html>
