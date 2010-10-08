@@ -29,34 +29,47 @@
             <h:outputText value="#{paciente.numero}" />
         </p:column>
 
-        <p:column style="width: 60%" filterBy="#{paciente.nmPaciente}">
+        <p:column style="width: 15%"  filterBy="#{paciente.laudo.nmLaudo}">
+            <f:facet name="header">
+                <h:outputText  style="float:left;" value="Tipo Laudo" />
+            </f:facet>
+            <h:outputText value="#{paciente.laudo.nmLaudo}" />
+        </p:column>
+
+        <p:column style="width: 50%" filterBy="#{paciente.nmPaciente}">
             <f:facet  name="header">
-                <h:outputText style="float:left;" value="Nome" />
+                <h:outputText style="float:left;" value="Paciente" />
             </f:facet>
             <h:outputText value="#{paciente.nmPaciente}" />
         </p:column>
 
-        <p:column style="width: 26%" filterBy="#{paciente.convenio.nmConvenio}">
+        <p:column style="width: 15%" filterBy="#{paciente.convenio.nmConvenio}">
             <f:facet name="header">
                 <h:outputText style="float:left;" value="Convenio" />
             </f:facet>
             <h:outputText value="#{paciente.convenio.nmConvenio}" />
         </p:column>
 
-        <p:column style="width:4%">
+        <p:column style="width:9%">
             <p:commandButton style="font-size: 11px" ajax="false"
                     image="ui-icon ui-icon-pencil" action="#{pacienteComp.editarLaudo}">
+                <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
+            </p:commandButton>
+            <p:commandButton style="font-size: 11px" ajax="false"
+                    image="ui-icon-close" action="#{pacienteComp.excluirLaudo}">
                 <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
             </p:commandButton>
         </p:column>
 
     </p:dataTable>
 
-
-
 </h:form>
 	</div>
-
+	<h:form>
+	<div class="linha">
+		<p:commandButton value="Novo" action="#{pacienteComp.novoLaudo}" ajax="false" image="ui-icon-document"/>
+	</div>
+	</h:form>
 </div>
 </ui:define>
 </ui:composition>

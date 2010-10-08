@@ -34,7 +34,7 @@
              <p:menuitem value="Convenio" update="messages"  url="../../laudos/xhtml/cadconvenio.xhtml"/>
          </p:submenu>
          <p:submenu label="Laudos">
-             <p:menuitem value="Novo Laudo" update="messages" url="../../laudos/xhtml/cadlaudo.xhtml"/>
+             <p:menuitem value="Novo Laudo" update="messages" ajax="false" action="#{pacienteComp.chamaCadLaudo}"/>
              <p:menuitem value="Listar Laudos" update="messages" url="../../laudos/xhtml/lstlaudos.xhtml"/>
          </p:submenu>
 

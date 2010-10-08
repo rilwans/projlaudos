@@ -85,7 +85,7 @@ public class PacienteComp implements Serializable {
 	/**
 	 * @return the novo
 	 */
-	public boolean isNovo() {
+	public boolean getNovo() {
 		return novo;
 	}
 
@@ -127,7 +127,7 @@ public class PacienteComp implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void novoLaudo() {
+	public String novoLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		setNovo(true);
 		setIdConvenio(0);
@@ -140,12 +140,19 @@ public class PacienteComp implements Serializable {
 					.addMessage(null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel iniciar um novo Laudo!", ""));
 		}
+		return "cadlaudo";
+	}
+
+	public String chamaCadLaudo(){
+		novoLaudo();
+		return "/xhtml/cadlaudo";
 	}
 
 	public String excluirLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			Facade.getInstance().delete(paciente);
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Laudo excluido com sucesso!", ""));
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel exclir o Laudo!", ""));
 		}
@@ -155,14 +162,18 @@ public class PacienteComp implements Serializable {
 	public void gravarLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			if (isNovo()) {
+			if (getNovo()) {
 				Convenio conv = (Convenio) Facade.getInstance().loadById(Convenio.class, "idConvenio", getIdConvenio());
 				paciente.setConvenio(conv);
+				Laudo lad = (Laudo) Facade.getInstance().loadById(Laudo.class, "idLaudo", getIdLaudo());
+				paciente.setLaudo(lad);
 				Integer i = (Integer) Facade.getInstance().insert(paciente);
 				paciente.setIdPaciente(i.intValue());
 			} else {
 				Convenio conv = (Convenio) Facade.getInstance().loadById(Convenio.class, "idConvenio", getIdConvenio());
 				paciente.setConvenio(conv);
+				Laudo lad = (Laudo) Facade.getInstance().loadById(Laudo.class, "idLaudo", getIdLaudo());
+				paciente.setLaudo(lad);
 				Facade.getInstance().update(paciente);
 				setPaciente((Paciente) Facade.getInstance().loadById(Paciente.class, "idPaciente", paciente.getIdPaciente()));
 			}
@@ -201,6 +212,19 @@ public class PacienteComp implements Serializable {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar Modelo!", ""));
 		}
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public String chamaLista(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			pacientes = (List<Paciente>) Facade.getInstance().listAll(Paciente.class);
+
+			return "lstlaudos";
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel listar os pacientes!", ""));
+		}
+		return "lstlaudos";
 	}
 
 	/**
