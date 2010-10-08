@@ -44,9 +44,9 @@
         </p:column>
 
         <p:column style="width:4%">
-            <p:commandButton style="font-size: 11px"
+            <p:commandButton style="font-size: 11px" ajax="false"
                     image="ui-icon ui-icon-pencil" action="#{pacienteComp.editarLaudo}">
-                <f:setPropertyActionListener value="#{paciente.idPaciente}" target="#{pacienteComp.paciente.idPaciente}"/>
+                <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
             </p:commandButton>
         </p:column>
 

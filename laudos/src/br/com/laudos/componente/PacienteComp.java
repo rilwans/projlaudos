@@ -8,20 +8,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.laudos.domain.Convenio;
 import br.com.laudos.domain.Laudo;
 import br.com.laudos.domain.Paciente;
 import br.com.laudos.facade.Facade;
 
 @ManagedBean
 @SessionScoped
-public class PacienteComp implements Serializable{
+public class PacienteComp implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -4556537631224894438L;
 
-	private boolean novo=false;
+	private boolean novo = false;
 
 	private Paciente paciente = new Paciente();
 
@@ -31,7 +32,9 @@ public class PacienteComp implements Serializable{
 
 	private Laudo modelo = new Laudo();
 
-	private String txtModelo = "";
+	private int idConvenio = 0;
+
+	private int idLaudo = 0;
 
 	/**
 	 * @return the paciente
@@ -41,7 +44,8 @@ public class PacienteComp implements Serializable{
 	}
 
 	/**
-	 * @param paciente the paciente to set
+	 * @param paciente
+	 *            the paciente to set
 	 */
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
@@ -63,14 +67,16 @@ public class PacienteComp implements Serializable{
 	}
 
 	/**
-	 * @param pacientes the pacientes to set
+	 * @param pacientes
+	 *            the pacientes to set
 	 */
 	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
 
 	/**
-	 * @param novo the novo to set
+	 * @param novo
+	 *            the novo to set
 	 */
 	public void setNovo(boolean novo) {
 		this.novo = novo;
@@ -98,7 +104,8 @@ public class PacienteComp implements Serializable{
 	}
 
 	/**
-	 * @param modelos the modelos to set
+	 * @param modelos
+	 *            the modelos to set
 	 */
 	public void setModelos(List<Laudo> modelos) {
 		this.modelos = modelos;
@@ -112,26 +119,30 @@ public class PacienteComp implements Serializable{
 	}
 
 	/**
-	 * @param modelo the modelo to set
+	 * @param modelo
+	 *            the modelo to set
 	 */
 	public void setModelo(Laudo modelo) {
 		this.modelo = modelo;
 	}
 
 	@SuppressWarnings("unchecked")
-	public String novoLaudo(){
+	public void novoLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		setNovo(true);
+		setIdConvenio(0);
+		setIdLaudo(0);
 		try {
 			modelos = (List<Laudo>) Facade.getInstance().listAll(Laudo.class);
-			paciente = new Paciente();
+			setPaciente(new Paciente());
 		} catch (Exception e) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel iniciar um novo Laudo!", ""));
+			context
+					.addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel iniciar um novo Laudo!", ""));
 		}
-		return "cadlaudo";
 	}
 
-	public String excluirLaudo(){
+	public String excluirLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			Facade.getInstance().delete(paciente);
@@ -141,23 +152,34 @@ public class PacienteComp implements Serializable{
 		return "lstlaudos";
 	}
 
-	public String gravarLaudo(){
+	public void gravarLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			Facade.getInstance().insert(paciente);
+			if (isNovo()) {
+				Convenio conv = (Convenio) Facade.getInstance().loadById(Convenio.class, "idConvenio", getIdConvenio());
+				paciente.setConvenio(conv);
+				Integer i = (Integer) Facade.getInstance().insert(paciente);
+				paciente.setIdPaciente(i.intValue());
+			} else {
+				Convenio conv = (Convenio) Facade.getInstance().loadById(Convenio.class, "idConvenio", getIdConvenio());
+				paciente.setConvenio(conv);
+				Facade.getInstance().update(paciente);
+				setPaciente((Paciente) Facade.getInstance().loadById(Paciente.class, "idPaciente", paciente.getIdPaciente()));
+			}
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dados salvos com sucesso!", ""));
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel localizar os dados!", ""));
 		}
-		return "lstlaudos";
 	}
 
-	public String editarLaudo(){
+	public String editarLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		try {
-			paciente = (Paciente) Facade.getInstance().loadById(Paciente.class, "idPaciente",paciente.getIdPaciente());
-			System.out.println(paciente.getNmPaciente());
+			paciente = (Paciente) Facade.getInstance().loadById(Paciente.class, "idPaciente", paciente.getIdPaciente());
+			setNovo(false);
+			setIdLaudo(paciente.getLaudo().getIdLaudo());
+			setIdConvenio(paciente.getConvenio().getIdConvenio());
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel localizar os dados!", ""));
 			return "lstlaudos";
@@ -165,23 +187,50 @@ public class PacienteComp implements Serializable{
 		return "cadlaudo";
 	}
 
-	/**
-	 * @param txtModelo the txtModelo to set
-	 */
-	public void setTxtModelo(String txtModelo) {
-		this.txtModelo = txtModelo;
-	}
-
-	/**
-	 * @return the txtModelo
-	 */
-	public String getTxtModelo() {
-		return txtModelo;
-	}
-
 	public void escolheModelo() {
-		paciente.setLaudo(txtModelo);
+		FacesContext context = FacesContext.getCurrentInstance();
+		Laudo lad;
+		try {
+			if (getIdLaudo() != 0) {
+				lad = (Laudo) Facade.getInstance().loadById(Laudo.class, "idLaudo", getIdLaudo());
+				paciente.setLaudo(lad);
+				paciente.setTxtLaudo(lad.getLaudo());
+			} else
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Escolha um modelo válido!", ""));
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar Modelo!", ""));
+		}
+
 	}
 
+	/**
+	 * @param idConvenio
+	 *            the idConvenio to set
+	 */
+	public void setIdConvenio(int idConvenio) {
+		this.idConvenio = idConvenio;
+	}
+
+	/**
+	 * @return the idConvenio
+	 */
+	public int getIdConvenio() {
+		return idConvenio;
+	}
+
+	/**
+	 * @param idLaudo
+	 *            the idLaudo to set
+	 */
+	public void setIdLaudo(int idLaudo) {
+		this.idLaudo = idLaudo;
+	}
+
+	/**
+	 * @return the idLaudo
+	 */
+	public int getIdLaudo() {
+		return idLaudo;
+	}
 
 }

@@ -35,7 +35,7 @@ public class Paciente extends Bean {
 	private int idPaciente;
 
 	@Column(name = "laudo", nullable = false)
-	private String laudo;
+	private String txtLaudo;
 
 	@Transient
 	private List<Paciente> listapac;
@@ -53,6 +53,11 @@ public class Paciente extends Bean {
 	@JoinColumn(name = "id_convenio", nullable = false, insertable = true, updatable = true)
 	@ForeignKey(name = "fk_consulta_Convenio")
 	private Convenio convenio;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_laudo", nullable = false, insertable = true, updatable = true)
+	@ForeignKey(name = "fk_paciente_laudo")
+	private Laudo laudo;
 
 	@Column(name = "idade", nullable = true)
 	private int idade;
@@ -72,20 +77,6 @@ public class Paciente extends Bean {
 		this.idPaciente = idPaciente;
 	}
 
-	/**
-	 * @return the laudo
-	 */
-	public String getLaudo() {
-		return laudo;
-	}
-
-	/**
-	 * @param laudo
-	 *            the laudo to set
-	 */
-	public void setLaudo(String laudo) {
-		this.laudo = laudo;
-	}
 
 	/**
 	 * @return the nmPaciente
@@ -136,7 +127,6 @@ public class Paciente extends Bean {
 	 * @return the convenio
 	 */
 
-
 	/**
 	 * @return the idade
 	 */
@@ -173,7 +163,8 @@ public class Paciente extends Bean {
 	}
 
 	/**
-	 * @param convenio the convenio to set
+	 * @param convenio
+	 *            the convenio to set
 	 */
 	public void setConvenio(Convenio convenio) {
 		this.convenio = convenio;
@@ -184,6 +175,34 @@ public class Paciente extends Bean {
 	 */
 	public Convenio getConvenio() {
 		return convenio;
+	}
+
+	/**
+	 * @param txtLaudo the txtLaudo to set
+	 */
+	public void setTxtLaudo(String txtLaudo) {
+		this.txtLaudo = txtLaudo;
+	}
+
+	/**
+	 * @return the txtLaudo
+	 */
+	public String getTxtLaudo() {
+		return txtLaudo;
+	}
+
+	/**
+	 * @param laudo the laudo to set
+	 */
+	public void setLaudo(Laudo laudo) {
+		this.laudo = laudo;
+	}
+
+	/**
+	 * @return the laudo
+	 */
+	public Laudo getLaudo() {
+		return laudo;
 	}
 
 }
