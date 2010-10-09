@@ -151,7 +151,8 @@ public class PacienteComp implements Serializable {
 	public String excluirLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			Facade.getInstance().delete(paciente);
+			Paciente pac = (Paciente) Facade.getInstance().loadById(Paciente.class,"idPaciente", paciente.getIdPaciente());
+			Facade.getInstance().delete(pac);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Laudo excluido com sucesso!", ""));
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel exclir o Laudo!", ""));

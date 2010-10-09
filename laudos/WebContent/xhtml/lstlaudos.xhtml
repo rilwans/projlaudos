@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="linha">
-		<h:form>
+		<h:form id="form"  prependId="false">
 
     <p:dataTable var="paciente" value="#{pacienteComp.pacientes}" paginator="true" rows="10">
 
@@ -55,13 +55,37 @@
                     image="ui-icon ui-icon-pencil" action="#{pacienteComp.editarLaudo}">
                 <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
             </p:commandButton>
-            <p:commandButton style="font-size: 11px" ajax="false"
-                    image="ui-icon-close" action="#{pacienteComp.excluirLaudo}">
-                <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
+            <p:commandButton style="font-size: 11px" update="display"
+                    image="ui-icon-close" onclick="dlgConf.show()" >
+                     <f:setPropertyActionListener value="#{paciente}"
+                    target="#{pacienteComp.paciente}" />
             </p:commandButton>
         </p:column>
 
     </p:dataTable>
+
+
+<p:dialog header="Confirmacao" widgetVar="dlgConf" modal="true" height="100">
+<h:panelGroup id="display"  >
+
+    <div class="linha">
+    <h:outputText value="Deseja Realmente excluir esse laudo?" />
+    </div>
+    <div class="linha" >
+    	<div style="float:left">
+
+     <p:commandButton style="font-size: 11px;width: 100px" ajax="true" value="Sim" update="form,messages"
+                     action="#{pacienteComp.excluirLaudo}">
+	 </p:commandButton>
+	 </div>
+	 <div style="float:right; ">
+	 <p:commandButton style="font-size: 11px;width: 100px" ajax="false" value="Nao"
+                     onclick="dlgConf.close()" >
+	 </p:commandButton>
+	 </div>
+</div>
+</h:panelGroup>
+</p:dialog>
 
 </h:form>
 	</div>
