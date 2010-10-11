@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laudo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nmPaciente" class="java.lang.String"/>
+	<field name="nmMedico" class="java.lang.String"/>
+	<field name="convenio.nmConvenio" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="txtLaudo" class="java.lang.String"/>
+	<field name="laudo.nmLaudo" class="java.lang.String"/>
+	<field name="dtExame" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image scaleImage="RealSize">
+				<reportElement x="3" y="3" width="86" height="74"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\workspace\\laudos\\WebContent\\images\\logo-medicina.jpg"]]></imageExpression>
+			</image>
+			<image scaleImage="RealSize">
+				<reportElement x="463" y="3" width="90" height="74"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\workspace\\laudos\\WebContent\\images\\medicina_foto.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<textField>
+				<reportElement x="62" y="0" width="311" height="20"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nmPaciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="20" width="263" height="20"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nmMedico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="40" width="263" height="20"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{convenio.nmConvenio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="62" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="0" width="93" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº exame:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="479" y="0" width="69" height="20"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="62" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Convênio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="20" width="75" height="20"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dtExame}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="384" y="20" width="93" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data do exame:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="16" y="26" width="523" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtLaudo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="0" width="523" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{laudo.nmLaudo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="452" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Laudos V2.0]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="67" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="3" width="62" height="20"/>
+				<textElement/>
+				<text><![CDATA[Impresso em:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="325" y="42" width="214" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dr. Cornélio Mendes Neto CRM: 368 PI]]></text>
+			</staticText>
+			<line>
+				<reportElement x="325" y="41" width="214" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

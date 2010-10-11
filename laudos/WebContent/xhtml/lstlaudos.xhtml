@@ -44,14 +44,14 @@
             <h:outputText value="#{paciente.nmPaciente}" />
         </p:column>
 
-        <p:column style="width: 15%" filterBy="#{paciente.convenio.nmConvenio}">
+        <p:column style="width: 12%" filterBy="#{paciente.convenio.nmConvenio}">
             <f:facet name="header">
                 <h:outputText style="float:left;" value="Convenio" />
             </f:facet>
             <h:outputText value="#{paciente.convenio.nmConvenio}" />
         </p:column>
 
-        <p:column style="width:9%">
+        <p:column style="width:12%">
             <p:commandButton style="font-size: 11px" ajax="false"
                     image="ui-icon ui-icon-pencil" action="#{pacienteComp.editarLaudo}">
                 <f:setPropertyActionListener value="#{paciente}" target="#{pacienteComp.paciente}" />
@@ -60,6 +60,10 @@
                     image="ui-icon-close" onclick="dlgConf.show()" >
                      <f:setPropertyActionListener value="#{paciente}"
                     target="#{pacienteComp.paciente}" />
+            </p:commandButton>
+            <p:commandButton style="font-size: 11px" action="#{pacienteComp.imprimeLaudo}" ajax="false" image="ui-icon-print">
+		            <f:setPropertyActionListener value="#{paciente}"
+		                    target="#{pacienteComp.paciente}" />
             </p:commandButton>
         </p:column>
 
@@ -93,6 +97,7 @@
 	<h:form>
 	<div class="linha">
 		<p:commandButton value="Novo" action="#{pacienteComp.novoLaudo}" ajax="false" image="ui-icon-document"/>
+
 	</div>
 	</h:form>
 </div>

@@ -1,5 +1,6 @@
 package br.com.laudos.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -61,6 +62,10 @@ public class Paciente extends Bean {
 
 	@Column(name = "idade", nullable = true)
 	private int idade;
+
+	@Column(name = "dt_exame", nullable = true)
+	private Date dtExame ;
+
 
 	/**
 	 * @return the idPaciente
@@ -203,6 +208,20 @@ public class Paciente extends Bean {
 	 */
 	public Laudo getLaudo() {
 		return laudo;
+	}
+
+	/**
+	 * @param dtExame the dtExame to set
+	 */
+	public void setDtExame(Date dtExame) {
+		this.dtExame = dtExame;
+	}
+
+	/**
+	 * @return the dtExame
+	 */
+	public Date getDtExame() {
+		return dtExame;
 	}
 
 }

@@ -25,6 +25,10 @@ public class LaudoComp implements Serializable {
 
 	private Laudo laudo = new Laudo();
 
+	private Laudo laudonovo = new Laudo();
+
+
+
 
 	/**
 	 * @return the laudos
@@ -33,6 +37,7 @@ public class LaudoComp implements Serializable {
 	public List<Laudo> getLaudos() {
 		try {
 			laudos = (List<Laudo>) Facade.getInstance().listAll(Laudo.class);
+			setLaudonovo(new Laudo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,14 +70,43 @@ public class LaudoComp implements Serializable {
 	public String gravaLaudo(ActionEvent actionEvent) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			Facade.getInstance().update(laudo);
+				Facade.getInstance().update(laudo);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dados Salvos com Sucesso!", ""));
 		} catch (Exception e) {
+			e.printStackTrace();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi Possivel Salvar os Dados!!", ""));
+		}
+		setLaudonovo(new Laudo());
+		return "lstmodelos";
+	}
+
+	public String gravaNovoLaudo(ActionEvent actionEvent) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+				Facade.getInstance().insert(laudonovo);
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dados Salvos com Sucesso!", ""));
+		} catch (Exception e) {
+			e.printStackTrace();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi Possivel Salvar os Dados!!", ""));
 		}
 
 		return "lstmodelos";
 	}
+
+	/**
+	 * @param laudonovo the laudonovo to set
+	 */
+	public void setLaudonovo(Laudo laudonovo) {
+		this.laudonovo = laudonovo;
+	}
+
+	/**
+	 * @return the laudonovo
+	 */
+	public Laudo getLaudonovo() {
+		return laudonovo;
+	}
+
 
 
 }

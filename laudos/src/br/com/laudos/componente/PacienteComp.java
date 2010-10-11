@@ -1,13 +1,22 @@
 package br.com.laudos.componente;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.laudos.domain.Convenio;
 import br.com.laudos.domain.Laudo;
 import br.com.laudos.domain.Paciente;
@@ -143,7 +152,7 @@ public class PacienteComp implements Serializable {
 		return "cadlaudo";
 	}
 
-	public String chamaCadLaudo(){
+	public String chamaCadLaudo() {
 		novoLaudo();
 		return "/xhtml/cadlaudo";
 	}
@@ -151,7 +160,7 @@ public class PacienteComp implements Serializable {
 	public String excluirLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			Paciente pac = (Paciente) Facade.getInstance().loadById(Paciente.class,"idPaciente", paciente.getIdPaciente());
+			Paciente pac = (Paciente) Facade.getInstance().loadById(Paciente.class, "idPaciente", paciente.getIdPaciente());
 			Facade.getInstance().delete(pac);
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Laudo excluido com sucesso!", ""));
 		} catch (Exception e) {
@@ -216,7 +225,7 @@ public class PacienteComp implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String chamaLista(){
+	public String chamaLista() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			pacientes = (List<Paciente>) Facade.getInstance().listAll(Paciente.class);
@@ -256,6 +265,40 @@ public class PacienteComp implements Serializable {
 	 */
 	public int getIdLaudo() {
 		return idLaudo;
+	}
+
+	public void imprimeLaudo() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+		String pathRel = servletContext.getRealPath("/rel/laudo.jasper");
+
+		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+
+		List<Paciente> pacs = new ArrayList<Paciente>();
+
+		pacs.add(paciente);
+
+		JRDataSource jrds = new JRBeanCollectionDataSource(pacs);
+
+		try {
+			if (!pacs.isEmpty()) {
+				JasperPrint print = JasperFillManager.fillReport(pathRel, null, jrds);
+				byte[] bytes = JasperExportManager.exportReportToPdf(print);
+
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + "ListaDeDepartamentos.pdf" + "\";");
+				response.setContentLength(bytes.length);
+				ServletOutputStream ouputStream = response.getOutputStream();
+				ouputStream.write(bytes, 0, bytes.length);
+				facesContext.responseComplete();
+			}else{
+				facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum paciente selecionado!", ""));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel Gerar o relatorio!", ""));
+		}
+
 	}
 
 }

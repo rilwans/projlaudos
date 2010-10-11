@@ -40,6 +40,12 @@
 
 	<div class="linha">
 		<div style="float:left">
+		<h:outputLabel style="padding-right: 2px" value="Data de Realização do Exame:"/>
+		<p:calendar value="#{pacienteComp.paciente.dtExame}"></p:calendar>
+		</div>
+	</div>
+	<div class="linha">
+		<div style="float:left">
 		<h:outputLabel style="padding-right: 2px" value="Nome do Paciente:"/>
 		<h:inputText style=" width: 400px" value="#{pacienteComp.paciente.nmPaciente}"/>
 		<h:outputLabel style="padding-left: 30px" value="N. Exame:"/>
