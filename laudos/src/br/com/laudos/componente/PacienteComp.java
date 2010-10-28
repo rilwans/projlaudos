@@ -45,6 +45,8 @@ public class PacienteComp implements Serializable {
 
 	private int idLaudo = 0;
 
+	private String urlRetorno;
+
 	/**
 	 * @return the paciente
 	 */
@@ -138,6 +140,7 @@ public class PacienteComp implements Serializable {
 	@SuppressWarnings("unchecked")
 	public String novoLaudo() {
 		FacesContext context = FacesContext.getCurrentInstance();
+		setUrlRetorno(context.getViewRoot().getViewId());
 		setNovo(true);
 		setIdConvenio(0);
 		setIdLaudo(0);
@@ -299,6 +302,20 @@ public class PacienteComp implements Serializable {
 			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel Gerar o relatorio!", ""));
 		}
 
+	}
+
+	/**
+	 * @param urlRetorno the urlRetorno to set
+	 */
+	public void setUrlRetorno(String urlRetorno) {
+		this.urlRetorno = urlRetorno;
+	}
+
+	/**
+	 * @return the urlRetorno
+	 */
+	public String getUrlRetorno() {
+		return urlRetorno;
 	}
 
 }
