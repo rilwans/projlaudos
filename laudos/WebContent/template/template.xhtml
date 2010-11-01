@@ -19,7 +19,6 @@
 	<div class="main">
 	<div class="head"></div>
 	<div class="menu" style="font-size: 10px"><ui:insert name="menu" >
-
 <div class="menubarra" >
 <div style="float:left">
 <h:form id="fmenu">
@@ -27,7 +26,7 @@
     <p:menu widgetVar="dynaMenu" position="dynamic" context="'form:dynamicPosition','tl','br'">
     	<p:submenu >
              <p:menuitem value="Inicio" url="../../laudos/index.xhtml"/>
-			 <p:menuitem value="Sair" action="#{loginComp.logout}" ajax="true" update="fmenu,dynaMenu,principal"/>
+			 <p:menuitem value="Sair" action="#{loginComp.logout}" ajax="true" update="loginPanel,principal,content"/>
          </p:submenu>
          <p:submenu label="Cadastro">
              <p:menuitem value="Modelo" update="messages" url="../../laudos/xhtml/lstmodelos.xhtml"/>
@@ -54,7 +53,7 @@
 			</div>
 			<div style="float:right;">
 			<p:commandButton value="Entrar" style=" float:right; "
-				 action="#{loginComp.login}" update="loginPanel" ajax="true" >
+				 action="#{loginComp.login}" update="loginPanel,content,principal" ajax="true" >
 			</p:commandButton>
 			</div>
 		</div>
@@ -76,7 +75,7 @@
 	</ui:insert></div>
 
 	<div id="content" style="padding-bottom: 5px">
-		<ui:insert name="corpo">template</ui:insert>
+			<ui:insert name="corpo"></ui:insert>
 	</div>
 
 	<div id="footer" style="text-align: right"><span>Laudos V

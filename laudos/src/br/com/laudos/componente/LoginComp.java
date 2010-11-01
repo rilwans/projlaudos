@@ -2,6 +2,8 @@ package br.com.laudos.componente;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class LoginComp implements Serializable{
+public class LoginComp implements Serializable {
 
 	/**
 	 *
@@ -42,6 +44,7 @@ public class LoginComp implements Serializable{
 
 		HttpSession session = request.getSession();
 		session.invalidate();
+
 
 	}
 
