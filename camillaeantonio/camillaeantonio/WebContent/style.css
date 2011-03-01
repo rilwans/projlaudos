@@ -1,0 +1,34 @@
+*{margin:0; padding:0;}
+
+.main{width:800px; margin:0 auto; text-align:left;}
+
+body{font-family:Verdana, Arial, Helvetica, sans-serif; color:#474747; font-size:0.6875em; line-height:1.36em; text-align:center;}
+
+
+
+
+.head{
+	
+	background:url(imagens/barragrande.png) left top repeat-x;
+	height:209px;
+	width: 762px;
+	padding-bottom:10px;
+	
+	
+}
+
+.menu{
+	height:26px;
+	background-image: url(imagens/barramenu.png);
+	width: 762px;
+	text-align: center;
+}
+
+.quadro{
+	float:left;
+	padding-bottom:10px;
+	width: 762px;
+	
+}
+
+
