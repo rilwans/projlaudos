@@ -11,106 +11,202 @@
 <f:view contentType="text/html">
 <h:head>
 
-
-	<link href="style.css" rel="stylesheet" type="text/css" />
 	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
 	<title>Camilla e Antonio</title>
+	
+	<style type="text/css">
+
+	body{ 	
+		margin:0; 	
+		padding:0;	
+		font-size:14px; 
+		background-color:#ffffcc;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+	}
+ 
+	#meu_body{
+		width:752px; 
+		background-color:white; 
+		border:1px solid #993300; 
+		margin-top:15px;
+		margin-left: 20%;
+		margin-right: 20%;
+		background-color:#ffffcc;
+		}
+		
+	#barragrande{
+		background:url(imagens/barragrande.png) left top repeat-x;
+		height:200px;
+		width: 752px;
+		padding-bottom:10px;}
+	
+	#menu{
+		background:url(imagens/barramenu.png) left top ;
+		padding-top:10px;
+		height: 28px;
+		width: 752px;
+		color:#ffffcc;
+	}
+	
+	
+	
+	a{	text-decoration:none;	 color:#ffffcc;}
+	a:hover{	text-decoration:underline;	}
+	
+	
+	
+	#menutexto{
+		padding-left: 10px;
+		padding-right: 10px;
+		color:#ffffcc;
+		text-align: center
+	}
+	
+	#data,
+	#local,
+	#lista,
+	#mensagens,
+	#fotos,
+	#confirmacao,
+	#quadro{
+		margin:20px;
+		border:1px solid #993300;
+		background-color:#ffffcc;
+		}
+	
+	.titulo {
+		height:19px;
+		background:url('imagens/barrapequena.png'); 
+		font-family:verdana,arial;
+		color:white; 
+		padding-top:4px;
+		padding-left:15px;
+		padding-bottom:3px;
+		text-align:left;
+		background-color:#ffffcc;
+		
+	}
+ 
+ 
+	.conteudo {
+		padding:10px;
+		font-family:verdana,arial;
+		font-size:12px;
+		text-align:left;
+	}
+	
+	
+	</style>
+	
+	
 </h:head>
 
 <h:body>
-	<p:growl id="growl" showDetail="true" life="4000" />
-	<div class="main">
-	<div class="head"></div>
-
-
-
-	<div class="quadro"><p:panel header="Data">
-		<h:panelGrid columns="1">
-			<h:outputText value="23 de Julho de 2011 às 19:30" />
-		</h:panelGrid>
-
-	</p:panel></div>
-
-	<div class="quadro"><p:panel header="Local">
-		<h:panelGrid columns="1">
-			<h:outputText value="Cerimônia" style="font-weight: bold" />
-			<h:outputText value="Capela Mater Dolorosa -  Dom Barreto" />
-			<h:outputText value="Rua Gabriel Ferreira,743, Norte/Centro Teresina-PI" />
-			<p:spacer/>
-			<h:outputText value="Recepção" style="font-weight: bold" />
-			<h:outputText value="Fátima Camarço Buffet" />
-			<h:outputText value="Rua 31 de Março,1926, Ininga, Teresina-PI" />
-			<p:spacer/>
+		<p:growl id="growl" showDetail="true" life="4000" />
+		<div id="meu_body">
 			
-		</h:panelGrid>
-	</p:panel></div>
+			<div id="barragrande"></div>
+			<div id="menu">
+			<div id="menutexto">
+			<a href="#data">Data</a> |
+			<a href="#local">Local</a> |
+			<a href="#lista">Lista de Presentes</a> |
+			<a href="#mensagens">Envio de Mensagens</a> |
+			<a href="#fotos">Fotos</a>  |  
+		    <a href="#confirmacao">Confirmação de Presença</a></div>
+			</div>
+			<div id="data">
+				<div class="titulo"><img src="imagens/THREE_PETAL16x16.png"/> Data</div> 
+				<div class="conteudo">
+				<strong>23 de Julho de 2011</strong>  às 19:30h</div> 
+			</div>
+			
+			
+			<div id="local">
+				<div class="titulo"><img src="imagens/flor1_16x16.png"/> Local</div> 
+				<div class="conteudo">
+					<h:panelGrid columns="1">
+						<h:outputText value="Cerimônia" style="font-weight: bold" />
+						<h:outputText value="Capela Mater Dolorosa -  Dom Barreto" />
+						<h:outputText value="Rua Gabriel Ferreira,743, Norte/Centro Teresina-PI" />
+						<p:spacer/>
+						<h:outputText value="Recepção" style="font-weight: bold" />
+						<h:outputText value="Fátima Camarço Buffet" />
+						<h:outputText value="Rua 31 de Março,1926, Ininga, Teresina-PI" />
+						<p:spacer/>
+					</h:panelGrid>
+				</div> 
+			</div>
+			
+			<div id="lista">
+				<div class="titulo"><img src="imagens/flor2_16x16.png"/> Lista de Presentes</div> 
+				<div class="conteudo">
+					<strong>Em desenvolvimento</strong>	
+				</div> 
+			</div>
+			
+			<div id="mensagens">
+				<div class="titulo"><img src="imagens/flor3_16x16.png"/> Envio de Mensagens</div> 
+				<div class="conteudo">
+					<h:form>
+						<h:panelGrid columns="2">
+							<h:outputText value="Aproveite a oportunidade e envie mensagens para os noivos." />
+							<h:graphicImage url="imagens/mail.gif" />
+						</h:panelGrid>
+					
+						<h:panelGrid columns="2">
+							<h:outputText value="Nome" />
+							<h:inputText value="#{principalComp.nome}" />
+			
+							<h:outputText value="Email" />
+							<h:inputText value="#{principalComp.email}" />
+			
+							<h:outputText value="Mensagem" />
+							<h:inputTextarea value="#{principalComp.texto}" cols="50" rows="5" />
+						</h:panelGrid>
+			
+						<h:panelGrid columns="1">
+							<p:commandButton ajax="false"  value="Enviar" action="#{principalComp.enviarMsg}" />
+						</h:panelGrid>
+					</h:form>	
+				</div> 
+			</div>
 
-	<div class="quadro"><p:panel header="Lista de Presentes">
-		<h:panelGrid columns="1">
-			<h:outputText value="Em desenvolvimento" />
-		</h:panelGrid>
-	</p:panel></div>
+			<div id="fotos">
+				<div class="titulo"><img src="imagens/flor4_16x16.png"/> Fotos</div> 
+				<div class="conteudo">
+					<p:galleria effect="#{principalComp.effect}" effectSpeed="1000">
+	    				<ui:repeat value="#{principalComp.images}" var="image">
+	       				 <p:graphicImage value="fotos/#{image}"
+	           			 title="#{image}" alt="Description goes here"/>
+	    				</ui:repeat>
+					</p:galleria>	
+				</div> 
+			</div>
 
-	<div class="quadro"><h:form>
-		<p:panel header="Envio de Mensagens">
-			<h:panelGrid columns="2">
-				<h:outputText value="Aproveite a oportunidade e envie mensagens para os noivos." />
-				<h:graphicImage url="imagens/mail.gif" />
-			</h:panelGrid>
-		
-			<h:panelGrid columns="2">
-				<h:outputText value="Nome" />
-				<h:inputText value="#{principalComp.nome}" />
-
-				<h:outputText value="Email" />
-				<h:inputText value="#{principalComp.email}" />
-
-				<h:outputText value="Mensagem" />
-				<h:inputTextarea value="#{principalComp.texto}" cols="50" rows="5" />
-			</h:panelGrid>
-
-			<h:panelGrid columns="1">
-				<p:commandButton ajax="false"  value="Enviar" action="#{principalComp.enviarMsg}" />
-			</h:panelGrid>
-
-
-		</p:panel>
-	</h:form></div>
-
-	<div class="quadro"><p:panel header="Fotos">
-		<p:galleria effect="#{principalComp.effect}" effectSpeed="1000">
-    	<ui:repeat value="#{principalComp.images}" var="image">
-       		 <p:graphicImage value="fotos/#{image}"
-            title="#{image}" alt="Description goes here"/>
-    	</ui:repeat>
-</p:galleria>
-                    
+			<div id="confirmacao">
+				<div class="titulo"><img src="imagens/flor5_16x16.png"/> Confirmação de Presença</div> 
+				<div class="conteudo">
+					<h:form>
+						<h:panelGrid columns="1">
+							<h:outputText value="Para confirmar sua presença, digite o nome do convidado e então confirme" />
+							<p:spacer></p:spacer>
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<h:outputText value="Convidado :" />
+							<h:inputText value="#{principalComp.convidado}" />
+							<p:commandButton ajax="false"  value="Confirmar" action="#{principalComp.confirmacao}" />
+						</h:panelGrid>		
+					</h:form>
 	
-	</p:panel></div>
+				</div> 
+			</div>
+			
+			<div id="quadro">
+				<div class="conteudo" style="text-align: center">© Todos os Direitos reservados - 2011</div>
+			</div>
 
-	<div class="quadro"><p:panel header="Confirmação de Presença">
-		<h:form>
-		<h:panelGrid columns="1">
-			<h:outputText value="Para confirmar sua presença, digite o nome do convidado e então confirme" />
-			<p:spacer></p:spacer>
-		</h:panelGrid>
-		<h:panelGrid columns="3">
-			<h:outputText value="Convidado :" />
-			<h:inputText value="#{principalComp.convidado}" />
-			<p:commandButton ajax="false"  value="Confirmar" action="#{principalComp.confirmacao}" />
-		</h:panelGrid>		
-		</h:form>
-	
-
-	
-	</p:panel></div>
-
-
-
-
-	</div>
-
-
+		</div>
 </h:body>
 </f:view>
 </html>

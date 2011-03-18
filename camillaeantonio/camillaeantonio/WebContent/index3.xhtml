@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<f:view contentType="text/html">
+<h:head>
+
+
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+	<title>Camilla e Antonio</title>
+</h:head>
+
+<h:body>
+	<p:growl id="growl" showDetail="true" life="4000" />
+	<div class="main">
+	<div class="head"></div>
+
+
+
+	<div class="quadro"><p:panel header="Data">
+		<h:panelGrid columns="1">
+			<h:outputText value="23 de Julho de 2011 às 19:30" />
+		</h:panelGrid>
+
+	</p:panel></div>
+
+	<div class="quadro"><p:panel header="Local">
+		<h:panelGrid columns="1">
+			<h:outputText value="Cerimônia" style="font-weight: bold" />
+			<h:outputText value="Capela Mater Dolorosa -  Dom Barreto" />
+			<h:outputText value="Rua Gabriel Ferreira,743, Norte/Centro Teresina-PI" />
+			<p:spacer/>
+			<h:outputText value="Recepção" style="font-weight: bold" />
+			<h:outputText value="Fátima Camarço Buffet" />
+			<h:outputText value="Rua 31 de Março,1926, Ininga, Teresina-PI" />
+			<p:spacer/>
+			
+		</h:panelGrid>
+	</p:panel></div>
+
+	<div class="quadro"><p:panel header="Lista de Presentes">
+		<h:panelGrid columns="1">
+			<h:outputText value="Em desenvolvimento" />
+		</h:panelGrid>
+	</p:panel></div>
+
+	<div class="quadro"><h:form>
+		<p:panel header="Envio de Mensagens">
+			<h:panelGrid columns="2">
+				<h:outputText value="Aproveite a oportunidade e envie mensagens para os noivos." />
+				<h:graphicImage url="imagens/mail.gif" />
+			</h:panelGrid>
+		
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome" />
+				<h:inputText value="#{principalComp.nome}" />
+
+				<h:outputText value="Email" />
+				<h:inputText value="#{principalComp.email}" />
+
+				<h:outputText value="Mensagem" />
+				<h:inputTextarea value="#{principalComp.texto}" cols="50" rows="5" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="1">
+				<p:commandButton ajax="false"  value="Enviar" action="#{principalComp.enviarMsg}" />
+			</h:panelGrid>
+
+
+		</p:panel>
+	</h:form></div>
+
+	<div class="quadro"><p:panel header="Fotos">
+		<p:galleria effect="#{principalComp.effect}" effectSpeed="1000">
+    	<ui:repeat value="#{principalComp.images}" var="image">
+       		 <p:graphicImage value="fotos/#{image}"
+            title="#{image}" alt="Description goes here"/>
+    	</ui:repeat>
+</p:galleria>
+                    
+	
+	</p:panel></div>
+
+	<div class="quadro"><p:panel header="Confirmação de Presença">
+		<h:form>
+		<h:panelGrid columns="1">
+			<h:outputText value="Para confirmar sua presença, digite o nome do convidado e então confirme" />
+			<p:spacer></p:spacer>
+		</h:panelGrid>
+		<h:panelGrid columns="3">
+			<h:outputText value="Convidado :" />
+			<h:inputText value="#{principalComp.convidado}" />
+			<p:commandButton ajax="false"  value="Confirmar" action="#{principalComp.confirmacao}" />
+		</h:panelGrid>		
+		</h:form>
+	
+
+	
+	</p:panel></div>
+
+
+
+
+	</div>
+
+
+</h:body>
+</f:view>
+</html>
