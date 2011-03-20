@@ -1,6 +1,5 @@
 package br.com.camillaeantonio.componente;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +16,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.camillaeantonio.domain.Confirma;
+import br.com.camillaeantonio.domain.Foto;
 import br.com.camillaeantonio.system.Facade;
 import br.com.framework.hibernate.HibernateOperation;
 
@@ -34,7 +34,7 @@ public class PrincipalComp implements Serializable {
 	private String texto = "";
 
 	private String nome = "";
-	
+
 	private String convidado = "";
 
 	private String effect = "fade";
@@ -53,14 +53,23 @@ public class PrincipalComp implements Serializable {
 		return email;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<String> getImages() {
-		String dir = "D:/workspace/camillaeantonio/WebContent/fotos";
+		/*
+		 * String dir = "D:/workspace/camillaeantonio/WebContent/fotos"; File
+		 * diretorio = new File(dir); File fList[] = diretorio.listFiles(); for
+		 * (int i = 0; i < fList.length; i++) { images.add(fList[i].getName());
+		 * }
+		 */
+		List<Foto> fotos = null;
+		try {
+			fotos = (List<Foto>) Facade.getInstance().listAll(Foto.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		File diretorio = new File(dir);
-		File fList[] = diretorio.listFiles();
-
-		for (int i = 0; i < fList.length; i++) {
-			images.add(fList[i].getName());
+		for (Foto f : fotos) {
+			images.add(f.getNome());
 		}
 
 		return images;
@@ -141,34 +150,33 @@ public class PrincipalComp implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Mensagem Enviada com Sucesso!"));
 	}
 
-	
-	public void confirmacao(){
-		if (getConvidado()==null || getConvidado().equals("")){
+	public void confirmacao() {
+		if (getConvidado() == null || getConvidado().equals("")) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!", "Nome do Convidado vazio!"));
 			return;
 		}
-			
+
 		Confirma conf = new Confirma();
 		conf.setDtConfirma(new Date());
 		conf.setNmConvidado(getConvidado());
-		
+
 		HibernateOperation hibernateOperation = new HibernateOperation();
 		Criteria criteria;
 		try {
 			criteria = hibernateOperation.getCriteria(Confirma.class);
-				
+
 			criteria.add(Restrictions.eq("nmConvidado", getConvidado()));
-			
+
 			@SuppressWarnings("unchecked")
 			List<Confirma> c = (List<Confirma>) hibernateOperation.listByCriteria(criteria);
-		
-			if (c.size()!=0){
+
+			if (c.size() != 0) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!", "Convidado já Confirmado"));
 				return;
-				}
-		
+			}
+
 			Facade.getInstance().insert(conf);
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -178,7 +186,7 @@ public class PrincipalComp implements Serializable {
 		}
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Confirmação Realizada!"));
-		
+
 		setConvidado("");
 	}
 
@@ -193,7 +201,7 @@ public class PrincipalComp implements Serializable {
 	public void setImages(List<String> images) {
 		this.images = images;
 	}
-	
+
 	/**
 	 * @param effect
 	 *            the effect to set

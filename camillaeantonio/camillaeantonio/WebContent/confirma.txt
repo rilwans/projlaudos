@@ -1,0 +1,14 @@
+<div class="conteudo">
+					 <h:form>
+						<h:panelGrid columns="1">
+							<h:outputText value="Para confirmar sua presença, digite o nome do convidado e então confirme" />
+							<p:spacer></p:spacer>
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<h:outputText value="Convidado :" />
+							<h:inputText value="#{principalComp.convidado}" />
+							<p:commandButton ajax="false"  value="Confirmar" action="#{principalComp.confirmacao}" />
+						</h:panelGrid>		
+					</h:form> 
+	
+				</div>
