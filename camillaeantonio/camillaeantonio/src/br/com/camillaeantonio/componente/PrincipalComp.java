@@ -69,7 +69,7 @@ public class PrincipalComp implements Serializable {
 		}
 
 		for (Foto f : fotos) {
-			images.add(f.getNome());
+			images.add(f.getNome().trim());
 		}
 
 		return images;
