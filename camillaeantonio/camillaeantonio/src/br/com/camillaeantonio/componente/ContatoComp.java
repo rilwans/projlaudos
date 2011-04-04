@@ -18,20 +18,17 @@ public class ContatoComp implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 935873234066132938L;
-	
-	
-	
+
 	private String email = "";
-	
+
 	private String assunto = "";
 
 	private String texto = "";
 
 	private String nome = "";
-	
+
 	private String convidado = "";
-	
-	
+
 	public void enviarMsg() {
 		SimpleEmail email = new SimpleEmail();
 		if (getNome() == null || getNome().equals("")) {
@@ -59,7 +56,7 @@ public class ContatoComp implements Serializable {
 
 				email.addTo("paduamendes@gmail.com", "padua");
 
-				email.setFrom(getEmail(), getNome()+" [paduamendes.web]"); // remetente
+				email.setFrom(getEmail(), getNome() + " [paduamendes.web]"); // remetente
 				email.setSubject(getAssunto().trim()); // assunto do e-mail
 				email.setMsg("Enviado por: " + getNome().trim() + " [" + getEmail().trim() + "]" + "\n\n MENSAGEM \n\n"
 						+ getTexto().trim()); // conteudo
@@ -82,54 +79,45 @@ public class ContatoComp implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Mensagem Enviada com Sucesso!"));
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getTexto() {
 		return texto;
 	}
-
 
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public String getConvidado() {
 		return convidado;
 	}
-
 
 	public void setConvidado(String convidado) {
 		this.convidado = convidado;
 	}
 
-
 	/**
-	 * @param assunto the assunto to set
+	 * @param assunto
+	 *            the assunto to set
 	 */
 	public void setAssunto(String assunto) {
 		this.assunto = assunto;
 	}
-
 
 	/**
 	 * @return the assunto

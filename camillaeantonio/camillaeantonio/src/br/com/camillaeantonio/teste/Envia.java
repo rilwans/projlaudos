@@ -7,11 +7,12 @@ public class Envia {
 
 	public static void main(String[] args) {
 		SimpleEmail email = new SimpleEmail();
-		
+
 		try {
-			email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do
-												// e-mail
-		
+			email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio
+													// do
+													// e-mail
+
 			email.addTo("paduamendes@gmail.com", "padua");
 
 			email.setFrom("paduamendes@gmail.com", "Eu"); // remetente

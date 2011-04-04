@@ -16,7 +16,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.camillaeantonio.domain.Confirma;
-import br.com.camillaeantonio.domain.Foto;
 import br.com.camillaeantonio.system.Facade;
 import br.com.framework.hibernate.HibernateOperation;
 
@@ -53,24 +52,30 @@ public class PrincipalComp implements Serializable {
 		return email;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<String> getImages() {
 		/*
 		 * String dir = "D:/workspace/camillaeantonio/WebContent/fotos"; File
 		 * diretorio = new File(dir); File fList[] = diretorio.listFiles(); for
 		 * (int i = 0; i < fList.length; i++) { images.add(fList[i].getName());
 		 * }
+		 * 
+		 * List<Foto> fotos = null; try { fotos = (List<Foto>)
+		 * Facade.getInstance().listAll(Foto.class); } catch (Exception e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * for (Foto f : fotos) { }
 		 */
-		List<Foto> fotos = null;
-		try {
-			fotos = (List<Foto>) Facade.getInstance().listAll(Foto.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		for (Foto f : fotos) {
-			images.add(f.getNome().trim());
-		}
+		images.clear();
+		images.add("foto01.jpg");
+		images.add("foto02.jpg");
+		images.add("foto03.jpg");
+		images.add("foto04.jpg");
+		images.add("foto05.jpg");
+		images.add("foto06.jpg");
+		images.add("foto07.jpg");
+		images.add("foto08.jpg");
+		images.add("foto09.jpg");
+		images.add("foto10.jpg");
 
 		return images;
 	}
