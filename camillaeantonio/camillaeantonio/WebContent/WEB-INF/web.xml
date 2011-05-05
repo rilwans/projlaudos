@@ -7,9 +7,9 @@
 
 	<display-name>Camilla e Antonio</display-name>
 
-	<listener>
-		<listener-class>br.com.camillaeantonio.system.Configuration</listener-class>
-	</listener>
+	<!--<listener>
+#		<listener-class>br.com.camillaeantonio.system.Configuration</listener-class>
+#	</listener>-->
 
 
 
@@ -69,12 +69,4 @@
 	</servlet-mapping>
 	
 	
-	
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>humanity</param-value>
-	</context-param>
-		
-
-
 </web-app>
