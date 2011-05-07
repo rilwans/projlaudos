@@ -65,6 +65,7 @@
 	#data,
 	#local,
 	#lista,
+	#mensagens,
 	#fotos,
 	#confirmacao,
 	#quadro{
@@ -94,14 +95,6 @@
 		padding: 5px;
 	}
 	
-	.foto {
-		font-family:verdana,arial;
-		font-size:12px;
-		text-align:right;
-		vertical-align:bottom;
-		padding: 5px;
-	}
-	
 	#contato {
 		padding:10px;
 		font-family:verdana,arial;
@@ -127,6 +120,7 @@
 			<a href="#data">Data</a> |
 			<a href="#local">Local</a> |
 			<a href="#lista">Lista de Presentes</a> |
+			<a href="#mensagens">Envio de Mensagens</a> |
 			<a href="#fotos">Fotos</a>  |  
 		    <a href="#confirmacao">Confirmação de Presença</a></div>
 			</div>
@@ -156,18 +150,41 @@
 			<div id="lista">
 				<div class="titulo"><img src="imagens/flor2_16x16.png"/> Lista de Presentes</div> 
 				<div class="conteudo">
-					<strong>Em breve</strong>	
+					<strong>Em desenvolvimento</strong>	
 				</div> 
 			</div>
 			
+			<div id="mensagens">
+				<div class="titulo"><img src="imagens/flor3_16x16.png"/> Envio de Mensagens</div> 
+				<div class="conteudo">
+					<h:form>
+						<h:panelGrid columns="2">
+							<h:outputText value="Aproveite a oportunidade e envie mensagens para os noivos." />
+							<h:graphicImage url="imagens/mail.gif" />
+						</h:panelGrid>
+					
+						<h:panelGrid columns="2">
+							<h:outputText value="Nome" />
+							<h:inputText value="#{principalComp.nome}" />
 			
+							<h:outputText value="Email" />
+							<h:inputText value="#{principalComp.email}" />
+			
+							<h:outputText value="Mensagem" />
+							<h:inputTextarea value="#{principalComp.texto}" cols="50" rows="5" />
+						</h:panelGrid>
+			
+						<h:panelGrid columns="1">
+							<p:commandButton ajax="false"  value="Enviar" action="#{principalComp.enviarMsg}" />
+						</h:panelGrid>
+					</h:form>	
+				</div> 
+			</div>
 
 			<div id="fotos">
 				<div class="titulo"><img src="imagens/flor4_16x16.png"/> Fotos</div> 
-				<div class="foto">
-					<p:galleria effect="slide" effectSpeed="1000" 
-            				panelWidth="550" panelHeight="250" frameWidth="140" frameHeight="70"
-            				filmstripPosition="left" showOverlays="true">
+				<div class="conteudo">
+					<p:galleria effect="#{principalComp.effect}" effectSpeed="1000">
 	    				<p:graphicImage value="/fotos/foto01.jpg" />
                         <p:graphicImage value="/fotos/foto02.jpg" />
                         <p:graphicImage value="/fotos/foto03.jpg" />
@@ -185,7 +202,7 @@
 			<div id="confirmacao">
 				<div class="titulo"><img src="imagens/flor5_16x16.png"/> Confirmação de Presença</div> 
 				<div class="conteudo">
-					<strong>Em breve</strong>
+					<strong>Em desenvolvimento</strong>
 				</div>
 				
 			</div> 
