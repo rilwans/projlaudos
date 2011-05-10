@@ -27,7 +27,7 @@
 		<welcome-file>login.xhtml</welcome-file>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
-
+<!-- 
 	<filter>
 		<filter-name>jsfFilter</filter-name>
 		<filter-class>br.com.camillaeantonio.system.Configuration</filter-class>
@@ -36,7 +36,7 @@
 		<filter-name>jsfFilter</filter-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</filter-mapping>
-
+-->
 <context-param>
     <param-name>com.sun.faces.allowTextChildren</param-name>
     <param-value>true</param-value>
