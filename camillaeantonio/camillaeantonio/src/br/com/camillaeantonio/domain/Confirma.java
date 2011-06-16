@@ -1,5 +1,6 @@
 package br.com.camillaeantonio.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.framework.hibernate.domain.Bean;
 
@@ -20,6 +22,11 @@ public class Confirma extends Bean{
 	 * 
 	 */
 	private static final long serialVersionUID = -2844812682830844361L;
+
+	/**
+	 * 
+	 */
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,5 +63,12 @@ public class Confirma extends Bean{
 		this.dtConfirma = dtConfirma;
 	}
 
-
+	@Transient
+	public String getDtConfirmaFormatada() {
+		if (dtConfirma != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			return formatter.format(dtConfirma);
+		}
+		return "";
+	}
 }

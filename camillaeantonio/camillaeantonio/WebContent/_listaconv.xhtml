@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<f:view contentType="text/html">
+<h:head>
+
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+	<title>Contato</title>
+	
+	<style type="text/css">
+
+	body{ 	
+		margin:0; 	
+		padding:0;	
+		font-size:14px; 
+		background-color:#ffffcc;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+	}
+ 
+	#meu_body{
+		width:752px; 
+		background-color:#ffffcc; 
+		border:1px solid #993300; 
+		margin-top:15px;
+		margin-left: 20%;
+		margin-right: 20%;
+		background-color:#ffffcc;
+		}
+		
+	
+	
+	
+	
+	a{	text-decoration:none;	 color:white;}
+	a:hover{	text-decoration:underline;	}
+	
+	
+	
+
+	
+
+	#quadro{
+		margin:20px;
+		border:1px solid #993300;
+		background-color:#ffffcc;
+		}
+	
+	.titulo {
+		height:19px;
+		font-family:verdana,arial;
+		color:black; 
+		padding-top:4px;
+		padding-left:15px;
+		text-align:left;
+		font-size:12px;
+		background-color:#ffffcc;
+		
+	}
+ 
+ 
+	.conteudo {
+		font-family:verdana,arial;
+		font-size:12px;
+		text-align:left;
+		background-color: #ffffcc;
+	}
+	
+	
+	
+	</style>
+	
+	
+</h:head>
+
+<h:body>
+		<div id="meu_body">
+	
+			
+			<div id="quadro">
+				<div class="titulo">Lista de Convidados</div> 
+				<div class="conteudo">
+					<p:dataList value="#{principalComp.confirmados}" var="confirma" itemType="disc" 
+						style="background-color:#ffffcc">
+						#{confirma.nmConvidado}, #{confirma.dtConfirmaFormatada}
+					</p:dataList>	
+				</div> 
+			</div>
+
+			
+			<div id="quadro">
+				<div class="conteudo" style="text-align: center">© Todos os Direitos reservados - 2011</div>
+			</div>
+
+		</div>
+</h:body>
+</f:view>
+</html>

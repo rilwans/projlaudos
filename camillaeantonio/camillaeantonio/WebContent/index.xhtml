@@ -72,6 +72,10 @@
 		border:1px solid #993300;
 		background-color:#ffffcc;
 		}
+		
+	#aviso{
+		margin:20px;
+	}
 	
 	.titulo {
 		height:19px;
@@ -120,18 +124,23 @@
 </h:head>
 
 <h:body>
-		<p:growl id="growl" showDetail="true" life="4000" />
 		<div id="meu_body">
 			
 			<div id="barragrande"></div>
+			
 			<div id="menu">
 			<div id="menutexto">
-			<a href="#data">Data</a> |
-			<a href="#local">Local</a> |
-			<a href="#lista">Lista de Presentes</a> |
-			<a href="#fotos">Fotos</a>  |  
-		    <a href="#confirmacao">Confirmação de Presença</a></div>
+				<a href="#data">Data</a> |
+				<a href="#local">Local</a> |
+				<a href="#lista">Lista de Presentes</a> |
+				<a href="#fotos">Fotos</a>  |  
+			    <a href="#confirmacao">Confirmação de Presença</a></div>
 			</div>
+			
+			<div id="aviso" >
+				<p:messages id="growl" showDetail="true"/>
+			</div>
+			
 			<div id="data">
 				<div class="titulo"><img src="imagens/THREE_PETAL16x16.png"/> Data</div> 
 				<div class="conteudo">
@@ -158,7 +167,15 @@
 			<div id="lista">
 				<div class="titulo"><img src="imagens/flor2_16x16.png"/> Lista de Presentes</div> 
 				<div class="conteudo">
-					<strong>Em breve</strong>	
+					<h:panelGrid columns="1">
+						<h:outputText value="Casa das Linhas - Jockey" style="font-weight: bold" />
+						<h:outputText value="Avenida Jóquei Clube - Jockey Club - Próximo a Faculdade Camilo Filho" />
+						<p:spacer/>
+						<h:outputText value="Extra - www.extra.com.br" style="font-weight: bold" />
+						<a href="http://www.extra.com.br/Site/ListaGerenciadaLandingPage.aspx?idListaCompra=142625"
+							 target="_BLANK" style="color:black">Clique aqui</a>
+						<p:spacer/>
+					</h:panelGrid>
 				</div> 
 			</div>
 			
@@ -187,7 +204,18 @@
 			<div id="confirmacao">
 				<div class="titulo"><img src="imagens/flor5_16x16.png"/> Confirmação de Presença</div> 
 				<div class="conteudo">
-					<strong>Em breve</strong>
+					<h:form>
+						<h:panelGrid columns="1">
+							<h:outputText value="Para confirmar sua presença, digite o nome do convidado e então confirme" />
+							<h:outputText value="Favor confirmar presença até o dia 17/07/2011" style="font-weight: bold"/>
+							<p:spacer></p:spacer>
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+							<h:outputText value="Convidado :" />
+							<h:inputText value="#{principalComp.convidado}" />
+							<p:commandButton ajax="false"  value="Confirmar" action="#{principalComp.confirmacao}" />
+						</h:panelGrid>		
+					</h:form>
 				</div>
 				
 			</div> 

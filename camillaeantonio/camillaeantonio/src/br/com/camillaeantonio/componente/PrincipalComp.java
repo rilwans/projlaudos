@@ -1,6 +1,8 @@
 package br.com.camillaeantonio.componente;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,6 +11,12 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
+import br.com.camillaeantonio.domain.Confirma;
+import br.com.camillaeantonio.system.Facade;
+import br.com.framework.hibernate.HibernateOperation;
 
 @ManagedBean
 @ViewScoped
@@ -28,6 +36,8 @@ public class PrincipalComp implements Serializable {
 	private String convidado = "";
 
 	private String effect = "fade";
+
+	private List<Confirma> confirmados = null;
 
 	public PrincipalComp() {
 		email = "";
@@ -138,39 +148,45 @@ public class PrincipalComp implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Mensagem Enviada com Sucesso!"));
 	}
 
-	/*
-	 * public void confirmacao() { if (getConvidado() == null ||
-	 * getConvidado().equals("")) {
-	 * FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!",
-	 * "Nome do Convidado vazio!")); return; }
-	 * 
-	 * Confirma conf = new Confirma(); conf.setDtConfirma(new Date());
-	 * conf.setNmConvidado(getConvidado());
-	 * 
-	 * HibernateOperation hibernateOperation = new HibernateOperation();
-	 * Criteria criteria; try { criteria =
-	 * hibernateOperation.getCriteria(Confirma.class);
-	 * 
-	 * criteria.add(Restrictions.eq("nmConvidado", getConvidado()));
-	 * 
-	 * @SuppressWarnings("unchecked") List<Confirma> c = (List<Confirma>)
-	 * hibernateOperation.listByCriteria(criteria);
-	 * 
-	 * if (c.size() != 0) { FacesContext.getCurrentInstance().addMessage(null,
-	 * new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!",
-	 * "Convidado já Confirmado")); return; }
-	 * 
-	 * Facade.getInstance().insert(conf); } catch (Exception e) {
-	 * FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!",
-	 * "Não foi possivel confirmar o convidado!")); e.printStackTrace(); return;
-	 * } FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!",
-	 * "Confirmação Realizada!"));
-	 * 
-	 * setConvidado(""); }
-	 */
+	public void confirmacao() {
+		if (getConvidado() == null || getConvidado().equals("")) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!", "Nome do Convidado vazio!"));
+			return;
+		}
+
+		Confirma conf = new Confirma();
+		conf.setDtConfirma(new Date());
+		conf.setNmConvidado(getConvidado());
+
+		HibernateOperation hibernateOperation = new HibernateOperation();
+		Criteria criteria;
+		try {
+			criteria = hibernateOperation.getCriteria(Confirma.class);
+
+			criteria.add(Restrictions.eq("nmConvidado", getConvidado()));
+
+			@SuppressWarnings("unchecked")
+			List<Confirma> c = (List<Confirma>) hibernateOperation.listByCriteria(criteria);
+
+			if (c.size() != 0) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Convidado já Confirmado"));
+				return;
+			}
+
+			Facade.getInstance().insert(conf);
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atençao!", "Não foi possivel confirmar o convidado!"));
+			e.printStackTrace();
+			return;
+		}
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Atençao!", "Confirmação Realizada!"));
+
+		setConvidado("");
+	}
 
 	public String getConvidado() {
 		return convidado;
@@ -178,6 +194,24 @@ public class PrincipalComp implements Serializable {
 
 	public void setConvidado(String convidado) {
 		this.convidado = convidado;
+	}
+
+	/**
+	 * @param confirmados
+	 *            the confirmados to set
+	 */
+	public void setConfirmados(List<Confirma> confirmados) {
+		this.confirmados = confirmados;
+	}
+
+	/**
+	 * @return the confirmados
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Confirma> getConfirmados() throws Exception {
+		confirmados = (List<Confirma>) Facade.getInstance().listAll(Confirma.class);
+		return confirmados;
 	}
 
 	/**
