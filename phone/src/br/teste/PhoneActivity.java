@@ -60,17 +60,23 @@ public class PhoneActivity extends ListActivity {
 				cursor,
 				// o quarto parametro eh um array com as colunas do
 				// cursor que serao mostradas
-				new String[] { PhoneProvider.Teste.TEXT },
+				new String[] { PhoneProvider.Teste.TEXT, PhoneProvider.Teste.TESTE_ID },
 				// o quinto parametro eh um array (com o mesmo
 				// tamanho do anterior) com os elementos que
 				// receberao os dados.
-				new int[] { R.id.text });
+				new int[] { R.id.text, R.id.textID });
 
 		setListAdapter(adapter);
 		}
 		catch (Exception e) {
 			Log.d(TAG, e.getMessage());
 		}
+		
+		
+		Button botaoremover = (Button) findViewById(R.id.botaoexcluir);
+
+		botaoinserir.setOnClickListener(mDeleteListener);
+
 	}
 
 	// Definindo um OnClickListener para o botão "Inserir"
@@ -81,6 +87,15 @@ public class PhoneActivity extends ListActivity {
 			editBox.setText("");
 		}
 	};
+	
+	// Definindo um OnClickListener para o botão "excluir"
+		private OnClickListener mDeleteListener = new OnClickListener() {
+			public void onClick(View v) {
+				Log.d(TAG,"entrou");
+				EditText editBox = (EditText) findViewById(R.id.textID);
+				remNote(editBox.getText().toString());
+			}
+		};
 
 	protected void addNote(String text) {
 
@@ -89,6 +104,21 @@ public class PhoneActivity extends ListActivity {
 			values.put(PhoneProvider.Teste.TEXT, text);
 
 			getContentResolver().insert(PhoneProvider.Teste.CONTENT_URI, values);
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+		}
+
+	}
+	
+	protected void remNote(String text) {
+
+		try {
+			String[] values = null;
+			String comDelete = "_id="+text.trim();
+
+			Log.d(TAG,text);
+			
+			getContentResolver().delete(PhoneProvider.Teste.CONTENT_URI, comDelete, values);
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 		}

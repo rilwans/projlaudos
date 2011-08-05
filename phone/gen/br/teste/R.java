@@ -14,14 +14,16 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int botaoVoltar=0x7f050007;
-        public static final int botaoinserir=0x7f050006;
+        public static final int botaoVoltar=0x7f050009;
+        public static final int botaoexcluir=0x7f050006;
+        public static final int botaoinserir=0x7f050008;
         public static final int button1=0x7f050002;
-        public static final int linearLayout1=0x7f050004;
+        public static final int linearLayout1=0x7f050003;
         public static final int tableLayout1=0x7f050000;
-        public static final int text=0x7f050003;
+        public static final int text=0x7f050004;
+        public static final int textID=0x7f050005;
         public static final int textView1=0x7f050001;
-        public static final int txtInsere=0x7f050005;
+        public static final int txtInsere=0x7f050007;
     }
     public static final class layout {
         public static final int bemvindo=0x7f030000;
