@@ -25,8 +25,14 @@
     </LinearLayout>
     
     <ListView 
-    	android:layout_height="wrap_content" 
     	android:id="@+id/listaNota" 
-    	android:layout_width="match_parent">
+    	android:layout_width="match_parent" android:layout_height="262dp">
     </ListView>
+    
+    <Button 
+    	android:text="Button" 
+    	android:id="@+id/botaoVoltar" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </Button>
 </LinearLayout>
