@@ -6,6 +6,12 @@
     <uses-sdk android:minSdkVersion="8" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    
+    	<provider
+			android:authorities="br.teste.phoneprovider"
+			android:name=".PhoneProvider"
+		/>
+    
         <activity android:label="@string/app_name"
         			android:name=".PhoneActivity">
 	        <intent-filter>

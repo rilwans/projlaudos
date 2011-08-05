@@ -17,7 +17,7 @@
         </EditText>
         
         <Button 
-        	android:id="@+id/button1" 
+        	android:id="@+id/botaoinserir" 
         	android:layout_width="150px" 
         	android:text="Inserir" 
         	android:layout_height="wrap_content">
@@ -25,7 +25,7 @@
     </LinearLayout>
     
     <ListView 
-    	android:id="@+id/listaNota" 
+    	android:id="@android:id/list" 
     	android:layout_width="match_parent" android:layout_height="262dp">
     </ListView>
     
