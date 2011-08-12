@@ -37,11 +37,11 @@ namespace testeHibernate
                 return Fluently.Configure()
                     .Database(PostgreSQLConfiguration.PostgreSQL82
                     .ConnectionString(c => c
-                        .Host("localhost")
+                        .Host("127.0.0.1")
                         .Port(5432)
-                        .Database("testdb")
-                        .Username("test")
-                        .Password("test")))
+                        .Database("teste")
+                        .Username("postgres")
+                        .Password("12345")))
                     .Mappings(m => m
                         .AutoMappings.Add(model))
                     .ExposeConfiguration(BuildSchema)
@@ -50,6 +50,7 @@ namespace testeHibernate
             catch (Exception e)
             {
                Console.WriteLine(e.StackTrace);
+               MessageBox.Show(e.StackTrace);
             }
             return null;
 
@@ -75,22 +76,32 @@ namespace testeHibernate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (ISession session = sessionFactory.OpenSession())
+            try
             {
-                using (ITransaction transaction = session.BeginTransaction())
+                using (ISession session = sessionFactory.OpenSession())
                 {
-                    TabelaHiber t = new TabelaHiber();
-                    t.nome = "Pardal";
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        TabelaHiber t = new TabelaHiber();
+                        t.Id = 3;
+                        t.nome = "Pardal";
 
 
-                    TabelaHiber tt = new TabelaHiber();
-                    tt.nome = "Teste";
+                        TabelaHiber tt = new TabelaHiber();
+                        tt.Id = 4;
+                        tt.nome = "Teste";
 
-                    session.Save(t);
-                    session.Save(tt);
+                        session.Save(t);
+                        session.Save(tt);
 
-                    transaction.Commit();
+                        transaction.Commit();
+                    }
                 }
+            }
+            catch (Exception ee)
+            {
+                Console.WriteLine(ee.StackTrace);
+                MessageBox.Show(ee.StackTrace);
             }
         }
 
