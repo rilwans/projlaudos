@@ -41,7 +41,7 @@ namespace testeHibernate
                         .Port(5432)
                         .Database("teste")
                         .Username("postgres")
-                        .Password("12345")))
+                        .Password("root")))
                     .Mappings(m => m
                         .AutoMappings.Add(model))
                     .ExposeConfiguration(BuildSchema)
