@@ -35,17 +35,12 @@ namespace testeHibernate
                 AutoPersistenceModel model = CreateMappings();
 
                 return Fluently.Configure()
-                    .Database(PostgreSQLConfiguration.PostgreSQL82
-                    .ConnectionString(c => c
-                        .Host("127.0.0.1")
-                        .Port(5432)
-                        .Database("teste")
-                        .Username("postgres")
-                        .Password("root")))
-                    .Mappings(m => m
-                        .AutoMappings.Add(model))
-                    .ExposeConfiguration(BuildSchema)
-                    .BuildSessionFactory();
+                    .Database(MsSqlConfiguration.MsSql2005
+                .ConnectionString(c => c.Server("PADUA-DELL\\SQLEXPRESS").Database("ORMTest").Username("sa").Password("sa")))
+                .Mappings(m => m
+                    .AutoMappings.Add(model))
+                .ExposeConfiguration(BuildSchema)
+                .BuildSessionFactory();
             }
             catch (Exception e)
             {
@@ -58,7 +53,9 @@ namespace testeHibernate
 
         private static AutoPersistenceModel CreateMappings()
         {
-            return AutoMap.Assembly(System.Reflection.Assembly.GetCallingAssembly()).Where(t => t.Namespace == "testeHibernate.Model");
+            return AutoMap.Assembly(System.Reflection.Assembly
+                .GetCallingAssembly())
+                .Where(t => t.Namespace == "testeHibernate.Model");
 
         }
 
@@ -82,12 +79,12 @@ namespace testeHibernate
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        TabelaHiber t = new TabelaHiber();
+                        Tabela t = new Tabela();
                         t.Id = 3;
                         t.nome = "Pardal";
 
 
-                        TabelaHiber tt = new TabelaHiber();
+                        Tabela tt = new Tabela();
                         tt.Id = 4;
                         tt.nome = "Teste";
 
