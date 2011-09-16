@@ -25,12 +25,12 @@ public class Teste {
 
 		List<Modelo> lista = null;
 		try {
-			lista = (List<Modelo>) hibernateOperation.listAll(Modelo.class);
+			/*lista = (List<Modelo>) hibernateOperation.listAll(Modelo.class);
 			for (Modelo modelo : lista) {
 				Modelo mod = (Modelo) hibernateOperation.loadById(Modelo.class,"idModelo",modelo.getIdModelo());
 				mod.setNmModelo("Alterado");
 				hibernateOperation.delete(mod);
-			}
+			}*/
 			lista = (List<Modelo>) hibernateOperation.listAll(Modelo.class);
 			for (Modelo modelo : lista) {
 				System.out.println(modelo.getNmModelo());
