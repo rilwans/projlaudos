@@ -35,7 +35,7 @@ public class HibernateOperation {
 		
 	}
 	
-	public Serializable create(Bean obj) throws Exception {
+	public Serializable insert(Bean obj) throws Exception {
 		Transaction transaction = null;
 		try {
 			transaction = (Transaction) HibernateUtils.getSessao().beginTransaction();

@@ -1,9 +1,14 @@
 package br.hibernate.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import br.hibernate.domain.Bean;
 
 public class HibernateUtils {
 
@@ -13,6 +18,8 @@ public class HibernateUtils {
 
 	private static final ThreadLocal<Transaction> transacoes = new ThreadLocal<Transaction>();
 	
+	public static List<Class<? extends Bean>> beans = new ArrayList<Class<? extends Bean>>();
+	
 	public HibernateUtils(){
 	}
 	
@@ -21,11 +28,16 @@ public class HibernateUtils {
 		if (sessionFactory==null){
 			try{
 				Configuration cfg = new Configuration();
-				cfg.addAnnotatedClass(Modelo.class);
+				
+				
+				for (Class<? extends Bean> bean : beans) {
+					cfg.addAnnotatedClass(bean);
+				}
+				
 				sessionFactory = cfg.configure().buildSessionFactory();
 	
 			}catch (Throwable err) {
-				System.err.println("Erro no getSession"+err);
+				System.err.println("Erro no getSessionFactory"+err);
 				throw new ExceptionInInitializerError(err);
 			}
 		}
@@ -66,6 +78,12 @@ public class HibernateUtils {
 		}
 	}
 
-	
+	public static void closeSession() {
+		Session session = (Session) sessoes.get();
+		if (session != null && session.isOpen()) {
+			sessoes.set(null);
+			session.close();
+		}
+	}	
 	
 }
