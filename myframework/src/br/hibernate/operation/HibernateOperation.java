@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.PropertyValueException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.exception.GenericJDBCException;
 import org.hibernate.proxy.HibernateProxy;
 
 import br.hibernate.domain.Bean;
@@ -16,6 +20,7 @@ import br.hibernate.utils.HibernateUtils;
 
 public class HibernateOperation {
 
+	private Logger logger = Logger.getLogger(HibernateOperation.class);
 	
 	public List<?> listAll(Class<? extends Bean> klass) throws Exception{
 		
@@ -30,6 +35,7 @@ public class HibernateOperation {
 		} catch (HibernateException e) {
 			if (HibernateUtils.transacaoAtiva())
 				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
 			throw e;
 		}
 		
@@ -45,6 +51,7 @@ public class HibernateOperation {
 		} catch (HibernateException e) {
 			if (HibernateUtils.transacaoAtiva())
 				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
 			throw e;
 		}
 	}
@@ -59,6 +66,7 @@ public class HibernateOperation {
 		} catch (HibernateException e) {
 			if (HibernateUtils.transacaoAtiva())
 				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
 			throw e;
 		}
 		return bean;
@@ -73,6 +81,7 @@ public class HibernateOperation {
 		} catch (HibernateException e) {
 			if (HibernateUtils.transacaoAtiva())
 				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
 			throw e;
 		}
 	}
@@ -109,6 +118,7 @@ public class HibernateOperation {
 		} catch (HibernateException e) {
 			if (HibernateUtils.transacaoAtiva())
 				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
 			throw e;
 		}
 
@@ -118,6 +128,46 @@ public class HibernateOperation {
 		Map<String, Object> proprety = new HashMap<String, Object>();
 		proprety.put(propretyName, id);
 		return loadById(klass, proprety);
+	}
+	
+	private void restoreSession(HibernateException exception) throws Exception {
+		logger.error("Erro na Transação.", exception);
+
+		if (HibernateUtils.transacaoAtiva())
+			HibernateUtils.rollbackTransaction();
+
+		String msg = "";
+		if (exception instanceof ConstraintViolationException) {
+			ConstraintViolationException e = (ConstraintViolationException) exception;
+
+			String erro = e.getSQLException().getMessage();
+
+			int start = erro.indexOf("**") + 2;
+			int end = erro.indexOf(".") - 1;
+			msg = erro.substring(start, end);
+
+		} else if (exception instanceof PropertyValueException) {
+			PropertyValueException e = (PropertyValueException) exception;
+
+			String propriedade = e.getPropertyName() != null ? e.getPropertyName() : "";
+			String entidade = e.getEntityName() != null ? e.getEntityName().substring(e.getEntityName().lastIndexOf(".") + 1)
+					: "";
+
+			if (e.getMessage().indexOf("not-null") >= 0) {
+				msg = "Na entidade " + entidade + " a propriedade " + propriedade + " não pode ser nulo.";
+			} else
+				msg = "Entidade: " + entidade + ", Propriedade: " + propriedade + ", Erro: " + e.getMessage();
+		} else if (exception instanceof GenericJDBCException) {
+			GenericJDBCException e = (GenericJDBCException) exception;
+
+			String erro = e.getSQLException().getMessage();
+			msg = erro.replace("*", "");
+		}
+
+		// throw new BDException(!msg.isEmpty() ? msg :
+		// Arrays.deepToString(exception
+		// .getMessages()), exception);
+		throw new Exception(!msg.isEmpty() ? msg : exception.getMessage(), exception);
 	}
 	
 }
