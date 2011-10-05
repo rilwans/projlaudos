@@ -34,10 +34,10 @@ public class HibernateUtils {
 					cfg.addAnnotatedClass(bean);
 				}
 				
-				sessionFactory = cfg.configure().buildSessionFactory();
+				sessionFactory = cfg.buildSessionFactory();
 	
 			}catch (Throwable err) {
-				System.err.println("Erro no getSessionFactory"+err);
+				System.err.println("Erro no getSessionFactory "+err);
 				throw new ExceptionInInitializerError(err);
 			}
 		}

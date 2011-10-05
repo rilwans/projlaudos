@@ -130,6 +130,25 @@ public class HibernateOperation {
 		return loadById(klass, proprety);
 	}
 	
+	
+	public Criteria getCriteria(Class<? extends Bean> klass) throws Exception {
+		return HibernateUtils.getSessao().createCriteria(klass);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Bean> listByCriteria(Criteria criteria) throws Exception{
+		try{
+			List<Bean> list = criteria.list();
+			return list;
+		}catch (HibernateException e) {
+			if (HibernateUtils.transacaoAtiva())
+				HibernateUtils.rollbackTransaction();
+			restoreSession(e);
+			throw e; 
+		}
+	}
+	
+	
 	private void restoreSession(HibernateException exception) throws Exception {
 		logger.error("Erro na Transação.", exception);
 
