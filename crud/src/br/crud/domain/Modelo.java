@@ -1,4 +1,4 @@
-package br.crud.domain;
+package br.com.domain;
 
 import java.io.Serializable;
 

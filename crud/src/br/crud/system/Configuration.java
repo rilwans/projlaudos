@@ -1,6 +1,6 @@
-package br.crud.system;
+package br.com.system;
 
-import br.crud.domain.Modelo;
+import br.com.domain.Modelo;
 import br.hibernate.utils.HibernateUtils;
 import br.jsf.FilterFramework;
 

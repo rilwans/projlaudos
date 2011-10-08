@@ -1,4 +1,4 @@
-package br.crud.system;
+package br.com.system;
 
 import java.io.Serializable;
 import java.util.List;

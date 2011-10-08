@@ -1,4 +1,4 @@
-package br.crud.componente;
+package br.com.componente;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,15 +7,15 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.crud.domain.Modelo;
-import br.crud.system.Controler;
+import br.com.domain.Modelo;
+import br.com.system.Controler;
 
 @ManagedBean
 @ViewScoped
 public class CrudComp implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -1982179516716470436L;
 
@@ -28,9 +28,9 @@ public class CrudComp implements Serializable {
 		Modelo mod = new Modelo();
 		mod.setNmModelo("sdsada");
 		mod.setTxtModelo("sdasdsa");
-		
+
 		Controler.getInstance().insert(mod);
-		
+
 		modelos = (List<Modelo>) Controler.getInstance().listAll(Modelo.class);
 		return modelos;
 	}
