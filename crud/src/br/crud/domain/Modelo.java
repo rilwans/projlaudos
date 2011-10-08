@@ -9,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.hibernate.domain.Bean;
 
 @Entity
-@Table(name="modelo")
-public class Modelo extends br.hibernate.domain.Bean implements Serializable {
+@Table(name = "modelo")
+public class Modelo extends Bean implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2352907052376956709L;
 
@@ -23,10 +24,10 @@ public class Modelo extends br.hibernate.domain.Bean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_modelo", unique = true, nullable = false)
 	private int idModelo;
-	
+
 	@Column(name = "txt_modelo", nullable = false)
 	private String txtModelo;
-	
+
 	@Column(name = "nm_modelo", nullable = false)
 	private String nmModelo;
 
@@ -53,6 +54,5 @@ public class Modelo extends br.hibernate.domain.Bean implements Serializable {
 	public void setNmModelo(String nmModelo) {
 		this.nmModelo = nmModelo;
 	}
-	
-	
+
 }
