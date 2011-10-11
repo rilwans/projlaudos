@@ -15,7 +15,48 @@
 </h:head>
 
 <h:body>
-	<h:outputText value="#{crudComp.modelo.nmModelo}"/>
+
+	<h:form id="teste">
+
+	<h:outputText value="Novo:"/>
+	<h:inputText value="#{crudComp.modelo.nmModelo}"/>
+
+
+	<p:commandButton action="#{crudComp.insert}" update="teste" ajax="true" value="Salvar"/>
+
+
+    <p:dataTable var="modelo" value="#{crudComp.modelos}" paginator="true" rows="10">
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Modelo" />
+            </f:facet>
+            <h:outputText value="#{modelo.nmModelo}" />
+        </p:column>
+
+
+
+         <p:column style="width:32px">
+            <p:commandButton update="teste" ajax="true" value="deletar" action="#{crudComp.delete}" >
+                <f:setPropertyActionListener value="#{modelo}"
+                    target="#{crudComp.modelo}" />
+            </p:commandButton>
+            <p:commandButton update="teste" ajax="true" value="alterar" >
+                <f:setPropertyActionListener value="#{modelo}"
+                    target="#{crudComp.modeloalterado}" />
+            </p:commandButton>
+        </p:column>
+
+    </p:dataTable>
+
+<h:outputText value="alterar:"/>
+	<h:inputText value="#{crudComp.modeloalterado.nmModelo}"/>
+
+
+	<p:commandButton action="#{crudComp.update}" update="teste" ajax="true" value="Alterar"/>
+
+    </h:form>
+
 </h:body>
 </f:view>
 </html>
