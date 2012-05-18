@@ -19,7 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class AndroidFocoList extends ListActivity {
 	static final String URL = "http://www.foconaoferta.com.br/coletivo/xml/ofertas.xml";
@@ -102,12 +101,7 @@ public class AndroidFocoList extends ListActivity {
 				ofertas.add(oferta);
 			}
 
-		} // menuItems = getMap();
-
-		meuAdapter = new MyAdapter(this, getMap(0), R.layout.list_view, new String[] { TITULO, PRECODESCONTO, QTDCOMPRADOS, ATIVA, SITE },
-				new int[] { R.id.titulo, R.id.precodesconto, R.id.qtdcomprados, R.id.ativa, R.id.site });
-
-		list.setAdapter(meuAdapter);
+		}
 
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -129,15 +123,16 @@ public class AndroidFocoList extends ListActivity {
 
 		spOrdecacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+			@SuppressWarnings("rawtypes")
 			@Override
 			public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
-				Toast.makeText(AndroidFocoList.this, "Atualizado com Sucesso!", Toast.LENGTH_SHORT).show();
 				criaAdapter(i);
 
 				meuAdapter.notifyDataSetChanged();
 				list.setAdapter(meuAdapter);
 			}
 
+			@SuppressWarnings("rawtypes")
 			@Override
 			public void onNothingSelected(AdapterView arg0) {
 				// do something else

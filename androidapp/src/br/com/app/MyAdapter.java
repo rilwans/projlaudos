@@ -46,6 +46,9 @@ public class MyAdapter extends SimpleAdapter {
 		case 5:
 			icon.setImageDrawable(context.getResources().getDrawable(R.drawable.image5));
 			break;
+		case 6:
+			icon.setImageDrawable(context.getResources().getDrawable(R.drawable.image6));
+			break;
 		case 8:
 			icon.setImageDrawable(context.getResources().getDrawable(R.drawable.image8));
 			break;

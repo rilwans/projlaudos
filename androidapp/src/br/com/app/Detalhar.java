@@ -1,9 +1,8 @@
 package br.com.app;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Detalhar extends Activity {
-
-	private ArrayList<String> ordenacao = new ArrayList<String>();
 
 	public static Oferta oferta;
 
@@ -34,22 +31,24 @@ public class Detalhar extends Activity {
 		TextView TituloDetalhe = (TextView) findViewById(R.id.TituloDetalhe);
 		TextView ativo = (TextView) findViewById(R.id.detAtiva);
 		TextView percentual = (TextView) findViewById(R.id.detPercentual);
-		TextView precodesconto = (TextView) findViewById(R.id.detPrecoDesconto);
-		TextView precototal = (TextView) findViewById(R.id.detPrecoTotal);
+		TextView precodesconto = (TextView) findViewById(R.id.detPrecoDesc);
+		TextView precototal = (TextView) findViewById(R.id.detPrecoTot);
 		TextView qtcomprados = (TextView) findViewById(R.id.detQtComprados);
 
 		TituloDetalhe.setText(oferta.getTITULO());
 		ativo.setText(oferta.getATIVA());
 		percentual.setText(oferta.getDESCONTO() + " de Desconto");
-		precodesconto.setText("Por R$ " + oferta.getPRECODESCONTO());
-		precototal.setText("De " + oferta.getPRECOTOTAL());
+		precodesconto.setText("R$ " + oferta.getPRECODESCONTO());
+		precototal.setText("R$ " + oferta.getPRECOTOTAL().replace("R$", ""));
 		qtcomprados.setText(oferta.getQTDCOMPRADOS() + " já Compraram");
 
-		if (oferta.getOfertaAtiva())
+		if (oferta.getOfertaAtiva()) {
 			imgAtivo.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.verde));
-		else
+			ativo.setTextColor(Color.parseColor("#008B00"));
+		} else {
 			imgAtivo.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.amarelo));
-
+			ativo.setTextColor(Color.parseColor("#FFD700"));
+		}
 		int site = Integer.parseInt(oferta.getSITE());
 
 		switch (site) {
@@ -61,6 +60,9 @@ public class Detalhar extends Activity {
 			break;
 		case 5:
 			imgSite.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.image5));
+			break;
+		case 6:
+			imgSite.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.image6));
 			break;
 		case 8:
 			imgSite.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.image8));
@@ -109,20 +111,16 @@ public class Detalhar extends Activity {
 			break;
 		}
 
-		Button botaoAtualiza = (Button) findViewById(R.id.botaoVoltar);
-
-		botaoAtualiza.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				Intent troca = new Intent(Detalhar.this, AndroidFocoList.class);
-				AndroidFocoList.atualiza = false;
-				Detalhar.this.startActivity(troca);
-				Detalhar.this.finish();
-			}
-		});
-
+		/*
+		 * Button botaoAtualiza = (Button) findViewById(R.id.botaoVoltar);
+		 *
+		 * botaoAtualiza.setOnClickListener(new View.OnClickListener() {
+		 *
+		 * @Override public void onClick(View arg0) {
+		 *
+		 * AndroidFocoList.atualiza = false; Detalhar.this.getParent();
+		 * Detalhar.this.finish(); } });
+		 */
 		Button linkBtn = (Button) findViewById(R.id.botaoComprar);
 		linkBtn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
