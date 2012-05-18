@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#CFCFCF" >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="#CFCFCF"
         android:orientation="vertical"
         android:padding="4dip" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,14 +29,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.80"
-                    android:background="#FFFFFF"
-                    android:src="@drawable/icon114" />
+                    android:background="#CFCFCF"
+                    android:src="@drawable/icon114"
+                    android:paddingBottom="3dip" />
             </LinearLayout>
 
             <WebView
                 android:id="@+id/webImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                 />
 
             <TextView
                 android:id="@+id/TituloDetalhe"
@@ -50,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="3dip" >
+            android:padding="3dip"
+            android:background="#FFFFFF" >
 
             <ImageView
                 android:id="@+id/site"
@@ -62,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="3dip">
+                android:paddingLeft="3dip" >
 
                 <TextView
                     android:id="@+id/detPrecoDesc"
@@ -71,29 +76,45 @@
                     android:gravity="left"
                     android:text=""
                     android:textColor="#000080"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:id="@+id/imgAtiva"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="right"
-                        android:src="@drawable/amarelo" />
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingTop="6dip" >
 
                     <TextView
-                        android:id="@+id/detAtiva"
+                        android:id="@+id/info2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textColor="#4F4F4F"
+                        android:text="Preço original" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="right"
-                        android:text=""
-                        android:paddingLeft="5dip"/>
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:id="@+id/imgAtiva"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="right"
+                            android:src="@drawable/amarelo" />
+
+                        <TextView
+                            android:id="@+id/detAtiva"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:paddingLeft="5dip"
+                            android:text="" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView
@@ -141,7 +162,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
+            android:gravity="center_horizontal"
+            android:background="#FFFFFF" >
 
             <Button
                 android:id="@+id/botaoComprar"
@@ -150,7 +172,8 @@
                 android:text="Comprar" />
         </LinearLayout>
 
-        <!-- <LinearLayout
+        <!--
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left" >
@@ -160,22 +183,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Voltar" />
-        </LinearLayout> -->
+        </LinearLayout>
+        -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_alignParentBottom="true" >
+            android:layout_alignParentBottom="true"
+            android:gravity="center" >
 
             <TextView
-                    android:id="@+id/rodape"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Desenvolvido por Antônio de Pádua (paduamendes@gmail.com)"
-                    android:textColor="#4F4F4F"
-                    android:textSize="10sp" />
+                android:id="@+id/rodape"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Desenvolvido por Antônio de Pádua (paduamendes@gmail.com)"
+                android:textColor="#4F4F4F"
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AndroidFocoList extends ListActivity {
 	static final String URL = "http://www.foconaoferta.com.br/coletivo/xml/ofertas.xml";
@@ -73,34 +74,37 @@ public class AndroidFocoList extends ListActivity {
 
 		if (atualiza) {
 			atualiza = false;
-			ofertas = new ArrayList<Oferta>();
-			XMLParser parser = new XMLParser();
-			String xml = parser.getXmlFromUrl(URL); // getting XML
-			Document doc = parser.getDomElement(xml); // getting DOM element
+			try {
+				ofertas = new ArrayList<Oferta>();
+				XMLParser parser = new XMLParser();
+				String xml = parser.getXmlFromUrl(URL); // getting XML
+				Document doc = parser.getDomElement(xml); // getting DOM element
 
-			NodeList nl = doc.getElementsByTagName(OFERTA);
+				NodeList nl = doc.getElementsByTagName(OFERTA);
 
-			// looping through all item nodes <item>
-			for (int i = 0; i < nl.getLength(); i++) {
+				// looping through all item nodes <item>
+				for (int i = 0; i < nl.getLength(); i++) {
 
-				// creating new HashMap
+					// creating new HashMap
 
-				Element e = (Element) nl.item(i);
-				// adding each child node to HashMap key => value
-				Oferta oferta = new Oferta();
-				oferta.setATIVA(parser.getValue(e, ATIVA));
-				oferta.setDESCONTO(parser.getValue(e, DESCONTO));
-				oferta.setHREF(parser.getValue(e, HREF));
-				oferta.setIMAGEM(parser.getValue(e, IMAGEM));
-				oferta.setPRECODESCONTO(parser.getValue(e, PRECODESCONTO));
-				oferta.setPRECOTOTAL(parser.getValue(e, PRECOTOTAL));
-				oferta.setQTDCOMPRADOS(parser.getValue(e, QTDCOMPRADOS));
-				oferta.setSITE(parser.getValue(e, SITE).trim());
-				oferta.setTITULO(parser.getValue(e, TITULO));
+					Element e = (Element) nl.item(i);
+					// adding each child node to HashMap key => value
+					Oferta oferta = new Oferta();
+					oferta.setATIVA(parser.getValue(e, ATIVA));
+					oferta.setDESCONTO(parser.getValue(e, DESCONTO));
+					oferta.setHREF(parser.getValue(e, HREF));
+					oferta.setIMAGEM(parser.getValue(e, IMAGEM));
+					oferta.setPRECODESCONTO(parser.getValue(e, PRECODESCONTO));
+					oferta.setPRECOTOTAL(parser.getValue(e, PRECOTOTAL));
+					oferta.setQTDCOMPRADOS(parser.getValue(e, QTDCOMPRADOS));
+					oferta.setSITE(parser.getValue(e, SITE).trim());
+					oferta.setTITULO(parser.getValue(e, TITULO));
 
-				ofertas.add(oferta);
+					ofertas.add(oferta);
+				}
+			} catch (Exception e) {
+				Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
 			}
-
 		}
 
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -109,12 +113,12 @@ public class AndroidFocoList extends ListActivity {
 
 				Intent i = new Intent(AndroidFocoList.this, Detalhar.class);
 
-
 				Oferta oferta = ofertasOrdenadas.get(position);
 
 				Detalhar.oferta = oferta;
 
-				//Toast.makeText(AndroidFocoList.this, oferta.getTITULO(), Toast.LENGTH_SHORT).show();
+				// Toast.makeText(AndroidFocoList.this, oferta.getTITULO(),
+				// Toast.LENGTH_SHORT).show();
 
 				startActivity(i);
 

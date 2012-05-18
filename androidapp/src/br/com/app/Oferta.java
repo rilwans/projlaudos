@@ -152,7 +152,10 @@ public class Oferta {
 	 * @return the aTIVA
 	 */
 	public String getATIVA() {
-		return ATIVA;
+		if (ATIVA.isEmpty())
+			return "Não Ativa";
+		else
+			return "Ativa";
 	}
 
 	/**

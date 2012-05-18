@@ -99,7 +99,7 @@ public class MyAdapter extends SimpleAdapter {
 
 		String ativado = item.get("ativa");
 
-		if (ativado.equals("ativo"))
+		if (ativado.equals("Ativa"))
 			ativa.setImageDrawable(context.getResources().getDrawable(R.drawable.verde));
 		else
 			ativa.setImageDrawable(context.getResources().getDrawable(R.drawable.amarelo));

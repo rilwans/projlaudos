@@ -47,7 +47,7 @@ public class Detalhar extends Activity {
 			ativo.setTextColor(Color.parseColor("#008B00"));
 		} else {
 			imgAtivo.setImageDrawable(this.getApplicationContext().getResources().getDrawable(R.drawable.amarelo));
-			ativo.setTextColor(Color.parseColor("#FFD700"));
+			ativo.setTextColor(Color.parseColor("#EE7600"));
 		}
 		int site = Integer.parseInt(oferta.getSITE());
 
