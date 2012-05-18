@@ -219,12 +219,13 @@ public class AndroidFocoList extends ListActivity {
 
 		if (chave == 7) {
 
-			ofertasOrdenadas = new ArrayList<Oferta>();
-			for (Oferta o : ofertas) {
-				if (o.getOfertaAtiva()) {
-					ofertasOrdenadas.add(o);
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlAtivo() > p2.getVlAtivo() ? -1 : p1.getVlAtivo() < p2.getVlAtivo() ? +1 : 0;
 				}
-			}
+			});
 
 		}
 
