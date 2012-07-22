@@ -9,8 +9,14 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class Detalhar extends Activity {
 
@@ -20,6 +26,20 @@ public class Detalhar extends Activity {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.detalhar);
+
+		AdView adView = new AdView(this, AdSize.BANNER, "a1500b6865dd03c");
+		LinearLayout layout = (LinearLayout) findViewById(R.id.adLayout);
+
+		FrameLayout.LayoutParams adsParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+				FrameLayout.LayoutParams.MATCH_PARENT, android.view.Gravity.CENTER_HORIZONTAL);
+
+		layout.addView(adView, adsParams);
+
+		AdRequest adRequest = new AdRequest();
+		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+
+		// Start loading the ad in the background.
+		adView.loadAd(adRequest);
 
 		ImageView imgAtivo = (ImageView) findViewById(R.id.imgAtiva);
 		ImageView imgSite = (ImageView) findViewById(R.id.site);

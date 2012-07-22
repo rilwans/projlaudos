@@ -17,9 +17,15 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class AndroidFocoList extends ListActivity {
 	static final String URL = "http://www.foconaoferta.com.br/coletivo/xml/ofertas.xml";
@@ -52,6 +58,19 @@ public class AndroidFocoList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
+
+		AdView adView = new AdView(this, AdSize.BANNER, "a1500b6865dd03c");
+		LinearLayout layout = (LinearLayout) findViewById(R.id.adLayout);
+
+		FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, android.view.Gravity.CENTER_HORIZONTAL);
+
+		layout.addView(adView,adsParams);
+
+		AdRequest adRequest = new AdRequest();
+		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+
+		// Start loading the ad in the background.
+		adView.loadAd(adRequest);
 
 		list = (ListView) findViewById(android.R.id.list);
 

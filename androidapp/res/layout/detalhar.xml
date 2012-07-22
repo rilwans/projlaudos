@@ -16,8 +16,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/adLayout"
+                android:background="#CFCFCF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,15 +38,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.80"
                     android:background="#CFCFCF"
-                    android:src="@drawable/icon114"
-                    android:paddingBottom="3dip" />
+                    android:paddingBottom="3dip"
+                    android:src="@drawable/icon114" />
             </LinearLayout>
 
             <WebView
                 android:id="@+id/webImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/TituloDetalhe"
@@ -53,9 +60,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:orientation="horizontal"
-            android:padding="3dip"
-            android:background="#FFFFFF" >
+            android:padding="3dip" >
 
             <ImageView
                 android:id="@+id/site"
@@ -91,8 +98,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:textColor="#4F4F4F"
-                        android:text="Preço original" />
+                        android:text="Preço original"
+                        android:textColor="#4F4F4F" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -162,8 +169,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:background="#FFFFFF" >
+            android:background="#FFFFFF"
+            android:gravity="center_horizontal" >
 
             <Button
                 android:id="@+id/botaoComprar"
@@ -183,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Voltar" />
-        </LinearLayout>
+        </LinearLayout>
         -->
 
         <LinearLayout
