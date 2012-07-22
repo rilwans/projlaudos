@@ -67,7 +67,7 @@ public class AndroidFocoList extends ListActivity {
 		layout.addView(adView,adsParams);
 
 		AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.LOGTAG);
+		//adRequest.addTestDevice(AdRequest.LOGTAG);
 
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);

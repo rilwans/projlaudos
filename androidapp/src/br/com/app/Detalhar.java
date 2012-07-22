@@ -36,7 +36,7 @@ public class Detalhar extends Activity {
 		layout.addView(adView, adsParams);
 
 		AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.LOGTAG);
+		//adRequest.addTestDevice(AdRequest.Gender.);
 
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
