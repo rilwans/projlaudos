@@ -7,7 +7,7 @@
 
     <!--
          Main ListView
-		 Always give id value as list(@android:id/list) android:background="#CFCFCF"
+		 Always give id value as list(@android:id/list) android:background="#CFCFCF"
     -->
 
     <LinearLayout
@@ -21,9 +21,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingBottom="4dp" >
-
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -68,8 +65,7 @@
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Atualizar"
-                    android:visibility="invisible" />
+                    android:text="Atualizar" />
             </LinearLayout>
         </LinearLayout>
 
