@@ -62,12 +62,13 @@ public class AndroidFocoList extends ListActivity {
 		AdView adView = new AdView(this, AdSize.BANNER, "a1500b6865dd03c");
 		LinearLayout layout = (LinearLayout) findViewById(R.id.adLayout);
 
-		FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, android.view.Gravity.CENTER_HORIZONTAL);
+		FrameLayout.LayoutParams adsParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+				FrameLayout.LayoutParams.MATCH_PARENT, android.view.Gravity.CENTER_HORIZONTAL);
 
-		layout.addView(adView,adsParams);
+		layout.addView(adView, adsParams);
 
 		AdRequest adRequest = new AdRequest();
-		//adRequest.addTestDevice(AdRequest.LOGTAG);
+		// adRequest.addTestDevice(AdRequest.LOGTAG);
 
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
@@ -97,7 +98,9 @@ public class AndroidFocoList extends ListActivity {
 				ofertas = new ArrayList<Oferta>();
 				XMLParser parser = new XMLParser();
 				String xml = parser.getXmlFromUrl(URL); // getting XML
-				Document doc = parser.getDomElement(xml); // getting DOM element
+				Document doc = parser.getDomElement(xml.replace("'", "")); // getting
+																			// DOM
+																			// element
 
 				NodeList nl = doc.getElementsByTagName(OFERTA);
 
@@ -122,6 +125,7 @@ public class AndroidFocoList extends ListActivity {
 					ofertas.add(oferta);
 				}
 			} catch (Exception e) {
+
 				Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -268,7 +272,7 @@ public class AndroidFocoList extends ListActivity {
 			HashMap<String, String> map = new HashMap<String, String>();
 
 			map.put(SITE, o.getSITE());
-			map.put(TITULO, o.getTITULO());
+			map.put(TITULO, o.getTituloResumo());
 			map.put(HREF, o.getHREF());
 			map.put(IMAGEM, o.getIMAGEM());
 			map.put(PRECOTOTAL, "R$ " + o.getPRECOTOTAL());
@@ -285,4 +289,5 @@ public class AndroidFocoList extends ListActivity {
 
 		return maps;
 	}
+
 }

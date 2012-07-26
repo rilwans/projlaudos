@@ -207,4 +207,11 @@ public class Oferta {
 		}
 	}
 
+	public String getTituloResumo(){
+		if (getTITULO().trim().length()>100)
+			return getTITULO().substring(0,100)+" ...";
+		else
+			return getTITULO();
+	}
+
 }

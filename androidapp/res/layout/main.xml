@@ -2,34 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#CFCFCF"
     android:orientation="vertical"
     android:padding="4dip" >
 
     <!--
          Main ListView
-		 Always give id value as list(@android:id/list)
+		 Always give id value as list(@android:id/list) android:background="#CFCFCF"
     -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#CFCFCF"
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/adLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="4dp" >
+
+
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageApp"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/Barra"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:background="#CFCFCF"
-            android:src="@drawable/icon114" />
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <ImageView
+                android:id="@+id/imageApp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".30"
+                android:src="@drawable/icon114" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".40"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Foco na Oferta"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".30"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/atualiza"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Atualizar"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Spinner
             android:id="@+id/spOrdenacao"

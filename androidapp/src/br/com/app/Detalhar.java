@@ -36,7 +36,7 @@ public class Detalhar extends Activity {
 		layout.addView(adView, adsParams);
 
 		AdRequest adRequest = new AdRequest();
-		//adRequest.addTestDevice(AdRequest.Gender.);
+		// adRequest.addTestDevice(AdRequest.Gender.);
 
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
@@ -146,6 +146,14 @@ public class Detalhar extends Activity {
 			public void onClick(View v) {
 				Uri uri = Uri.parse(oferta.getHREF());
 				startActivity(new Intent(Intent.ACTION_VIEW, uri));
+			}
+		});
+
+		Button backBtn = (Button) findViewById(R.id.botaoVoltar);
+		backBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 
