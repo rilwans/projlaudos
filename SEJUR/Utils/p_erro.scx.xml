@@ -1,0 +1,601 @@
+<?xml version = "1.0" encoding="Windows-1252" standalone="yes"?>
+<VFPData>
+	<xsd:schema id="VFPData" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="VFPData" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="form" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="platform">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="8"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="uniqueid">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="10"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="timestamp">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:decimal">
+											<xsd:totalDigits value="10"/>
+											<xsd:fractionDigits value="0"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="class">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="classloc">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="baseclass">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="objname">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="parent">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="properties">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="protected">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="methods">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="objcode">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:base64Binary">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ole">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:base64Binary">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ole2">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved1">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved2">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved3">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved4">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved5">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved6">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved7">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="reserved8">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="user">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:maxLength value="2147483647"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="nrecno">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:decimal">
+											<xsd:totalDigits value="10"/>
+											<xsd:fractionDigits value="0"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:anyAttribute namespace="http://www.w3.org/XML/1998/namespace" processContents="lax"/>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6H0M9FHF</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[dataenvironment]]></class>
+		<classloc/>
+		<baseclass><![CDATA[dataenvironment]]></baseclass>
+		<objname><![CDATA[Dataenvironment]]></objname>
+		<parent/>
+		<properties><![CDATA[Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2><![CDATA[1]]></reserved2>
+		<reserved3/>
+		<reserved4><![CDATA[1]]></reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>2</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV5Q</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[form]]></class>
+		<classloc/>
+		<baseclass><![CDATA[form]]></baseclass>
+		<objname><![CDATA[FormP_Erro]]></objname>
+		<parent/>
+		<properties><![CDATA[Height = 348
+Width = 469
+DoCreate = .T.
+AutoCenter = .T.
+Picture = ..\figuras\fundo.bmp
+BorderStyle = 2
+Caption = "Erro"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+Icon = 
+WindowType = 1
+AlwaysOnTop = .T.
+Name = "FormP_Erro"
+]]></properties>
+		<protected/>
+		<methods><![CDATA[PROCEDURE Activate
+if ThisForm.Tag= "Sair"
+	ThisForm.Release
+endif
+ENDPROC
+PROCEDURE Init
+PARAMETERS merror, MESS, mess1, mprog, mlineno
+
+wcount = TxnLevel()
+if wcount > 0
+	for i = 1 to wcount
+		rollback
+	endfor
+endif
+
+if wConecta> 0
+	= sqlexec(wConecta, "IF @@TRANCOUNT> 0 ROLLBACK TRAN")
+	= sqlexec(wConecta, "insert into Erros " + ;
+		"(Instante, Nr_Erro, No_Mens, Nr_Linha, Nm_Prog, Nm_Sistema, Nm_Usuario) " + ;
+		"values (getdate(), '" + LTRIM(STR(merror)) + ;
+		"', '" + MESS + ;
+		"', '" + LTRIM(STR(mlineno)) + ;
+		"', '" + mprog + ;
+		"', '" + wSistema + ;
+		"', '" + wUsuario + "')")
+endif
+
+ThisForm.List1.AddItem("Erro nº " + LTRIM(STR(merror)))
+ThisForm.List1.AddItem(left(Mess, 60))
+if len(Mess)> 60
+	ThisForm.List1.AddItem(substr(Mess, 61, 60))
+endif
+ThisForm.List1.AddItem("")
+ThisForm.List1.AddItem("Linha nº " + LTRIM(STR(mlineno)))
+ThisForm.List1.AddItem("Programa: " + mProg)
+ThisForm.List1.AddItem("")
+ThisForm.List1.AddItem("Usuário " + wUsuario)
+ThisForm.List1.AddItem("Em " + ttoc(datetime()))
+
+Do Case
+	Case mError= 1960
+		ThisForm.Tag= "Sair"
+
+	Case Mess= 'Error loading printer driver.'
+		=MessageBox("A impressora não está preparada!" + chr(13) + ;
+			"Pode não estar ligada ou sem papel, verifique e tente novamente.",64,"Atenção")
+		ThisForm.Tag= "Sair"
+
+	Case mError= 1705 or mError= 2005
+		=MessageBox("Alguém está usando de forma exclusiva um arquivo" + chr(13) + ;
+			"necessário ao sistema, impossibilitando-o de ser acessado no momento!" + chr(13) + ;
+			"Contate o responsável pelo sistema!",64,"Atenção")
+		ThisForm.Tag= "Sair"
+EndCase	
+
+
+ENDPROC
+]]></methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>3</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV6G</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[commandbutton]]></class>
+		<classloc/>
+		<baseclass><![CDATA[commandbutton]]></baseclass>
+		<objname><![CDATA[Command1]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[Top = 69
+Left = 187
+Height = 29
+Width = 94
+Caption = "\<Ok"
+Name = "Command1"
+]]></properties>
+		<protected/>
+		<methods><![CDATA[PROCEDURE Click
+ThisForm.Release
+*quit
+ENDPROC
+]]></methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>7</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0NOXMJ</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[image]]></class>
+		<classloc/>
+		<baseclass><![CDATA[image]]></baseclass>
+		<objname><![CDATA[Image1]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[Picture = ..\figuras\erro.bmp
+Height = 32
+Left = 31
+Top = 25
+Width = 32
+Name = "Image1"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>10</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0MSXBN</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[listbox]]></class>
+		<classloc/>
+		<baseclass><![CDATA[listbox]]></baseclass>
+		<objname><![CDATA[List1]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[FontBold = .F.
+Height = 186
+Left = 12
+Top = 151
+Width = 445
+ColorSource = 1
+BorderColor = 0,0,0
+Name = "List1"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>9</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV63</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[shape]]></class>
+		<classloc/>
+		<baseclass><![CDATA[shape]]></baseclass>
+		<objname><![CDATA[Shape1]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[Top = 9
+Left = 12
+Height = 114
+Width = 445
+BackStyle = 0
+BorderStyle = 1
+Name = "Shape1"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>4</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV67</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[shape]]></class>
+		<classloc/>
+		<baseclass><![CDATA[shape]]></baseclass>
+		<objname><![CDATA[Shape2]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[Top = 13
+Left = 16
+Height = 106
+Width = 436
+BackStyle = 0
+BorderStyle = 1
+BackColor = 255,255,255
+BorderColor = 255,255,255
+Name = "Shape2"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>5</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV6B</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[texto]]></class>
+		<classloc><![CDATA[..\classes\edicao.vcx]]></classloc>
+		<baseclass><![CDATA[label]]></baseclass>
+		<objname><![CDATA[Texto1]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[FontBold = .F.
+FontSize = 12
+Caption = "Houve um erro com o programa e ele será fechado!"
+Left = 76
+Top = 31
+Name = "Texto1"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>6</nrecno>
+	</form>
+	<form>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6C0LZV6U</uniqueid>
+		<timestamp>0</timestamp>
+		<class><![CDATA[texto]]></class>
+		<classloc><![CDATA[..\classes\edicao.vcx]]></classloc>
+		<baseclass><![CDATA[label]]></baseclass>
+		<objname><![CDATA[Texto2]]></objname>
+		<parent><![CDATA[FormP_Erro]]></parent>
+		<properties><![CDATA[Caption = "Detalhes"
+Left = 12
+Top = 133
+Name = "Texto2"
+]]></properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>8</nrecno>
+	</form>
+	<form>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1><![CDATA[VERSION =   3.00]]></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>1</nrecno>
+	</form>
+	<form>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+		<nrecno>11</nrecno>
+	</form>
+</VFPData>

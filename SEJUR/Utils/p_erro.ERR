@@ -1,0 +1,114 @@
+FormP_Erro
+Error in line 7: Unrecognized command verb.
+Picture = ..\figuras\fundo.bmp
+Error in line 11: Syntax error.
+Icon = ..\farmacia\
+Error in line 17: Syntax error.
+Height = 32
+Error in line 82: Statement is not in a procedure.
+Left = 31
+Error in line 83: Statement is not in a procedure.
+Top = 25
+Error in line 84: Statement is not in a procedure.
+Width = 32
+Error in line 85: Statement is not in a procedure.
+Name = "Image1"
+Error in line 86: Statement is not in a procedure.
+FormP_Erro
+Error in line 88: Unrecognized command verb.
+Height = 186
+Error in line 89: Statement is not in a procedure.
+Left = 12
+Error in line 90: Statement is not in a procedure.
+Top = 151
+Error in line 91: Statement is not in a procedure.
+Width = 445
+Error in line 92: Statement is not in a procedure.
+ColorSource = 1
+Error in line 93: Statement is not in a procedure.
+BorderColor = 0,0,0
+Error in line 94: Syntax error.
+Name = "List1"
+Error in line 95: Statement is not in a procedure.
+FormP_Erro
+Error in line 97: Unrecognized command verb.
+Left = 12
+Error in line 98: Statement is not in a procedure.
+Top = 133
+Error in line 99: Statement is not in a procedure.
+Name = "Texto2"
+Error in line 100: Statement is not in a procedure.
+FormP_Erro
+Error in line 102: Unrecognized command verb.
+ThisForm.Release
+Error in line 103: Statement is not in a procedure.
+ENDPROC
+Error in line 105: Nesting error.
+Left = 187
+Error in line 107: Statement is not in a procedure.
+Height = 29
+Error in line 108: Statement is not in a procedure.
+Width = 94
+Error in line 109: Statement is not in a procedure.
+Caption = "\<Ok"
+Error in line 110: Statement is not in a procedure.
+Name = "Command1"
+Error in line 111: Statement is not in a procedure.
+FormP_Erro
+Error in line 113: Unrecognized command verb.
+commandbutton
+Error in line 114: Unrecognized command verb.
+commandbutton
+Error in line 115: Unrecognized command verb.
+FontSize = 12
+Error in line 116: Statement is not in a procedure.
+Caption = "Houve um erro com o programa e ele será fechado!"
+Error in line 117: Statement is not in a procedure.
+Left = 76
+Error in line 118: Statement is not in a procedure.
+Top = 31
+Error in line 119: Statement is not in a procedure.
+Name = "Texto1"
+Error in line 120: Statement is not in a procedure.
+FormP_Erro
+Error in line 122: Unrecognized command verb.
+Left = 16
+Error in line 123: Statement is not in a procedure.
+Height = 106
+Error in line 124: Statement is not in a procedure.
+Width = 436
+Error in line 125: Statement is not in a procedure.
+BackStyle = 0
+Error in line 126: Statement is not in a procedure.
+BorderStyle = 1
+Error in line 127: Statement is not in a procedure.
+BackColor = 255,255,255
+Error in line 128: Syntax error.
+BorderColor = 255,255,255
+Error in line 129: Syntax error.
+Name = "Shape2"
+Error in line 130: Statement is not in a procedure.
+FormP_Erro
+Error in line 132: Unrecognized command verb.
+Left = 12
+Error in line 133: Statement is not in a procedure.
+Height = 114
+Error in line 134: Statement is not in a procedure.
+Width = 445
+Error in line 135: Statement is not in a procedure.
+BackStyle = 0
+Error in line 136: Statement is not in a procedure.
+BorderStyle = 1
+Error in line 137: Statement is not in a procedure.
+Name = "Shape1"
+Error in line 138: Statement is not in a procedure.
+FormP_Erro
+Error in line 140: Unrecognized command verb.
+Ù@
+Error in line 155: Unrecognized command verb.
+ÙE
+Error in line 158: Unrecognized command verb.
+Ù#
+Error in line 159: Unrecognized command verb.
+A
+Error in line 163: Unrecognized command verb.
