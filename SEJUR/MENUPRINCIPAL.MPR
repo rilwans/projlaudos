@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 09/08/12          MENUPRINCIPAL.MPR           23:02:11  
+*       * 11/08/2012         MENUPRINCIPAL.MPR          23:50:02  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -26,28 +26,29 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _3ki1ddi4j OF _MSYSMENU PROMPT "Cadastros" COLOR SCHEME 3 ;
+DEFINE PAD _3kk1f31ke OF _MSYSMENU PROMPT "Cadastros" COLOR SCHEME 3 ;
 	KEY ALT+C, ""
-DEFINE PAD _3ki1ddi4k OF _MSYSMENU PROMPT "Movimento" COLOR SCHEME 3 ;
+DEFINE PAD _3kk1f31kf OF _MSYSMENU PROMPT "Movimento" COLOR SCHEME 3 ;
 	KEY ALT+M, ""
-DEFINE PAD _3ki1ddi4l OF _MSYSMENU PROMPT "Faturamento" COLOR SCHEME 3 ;
+DEFINE PAD _3kk1f31kg OF _MSYSMENU PROMPT "Faturamento" COLOR SCHEME 3 ;
 	KEY ALT+F, ""
-DEFINE PAD _3ki1ddi4m OF _MSYSMENU PROMPT "Relatorios" COLOR SCHEME 3 ;
+DEFINE PAD _3kk1f31kh OF _MSYSMENU PROMPT "Relatorios" COLOR SCHEME 3 ;
 	KEY ALT+R, ""
-DEFINE PAD _3ki1ddi4n OF _MSYSMENU PROMPT "Sair" COLOR SCHEME 3 ;
+DEFINE PAD _3kk1f31ki OF _MSYSMENU PROMPT "Sair" COLOR SCHEME 3 ;
 	KEY ALT+S, ""
-ON PAD _3ki1ddi4j OF _MSYSMENU ACTIVATE POPUP teste
-ON PAD _3ki1ddi4k OF _MSYSMENU ACTIVATE POPUP movimento
-ON SELECTION PAD _3ki1ddi4n OF _MSYSMENU ;
-	DO _3ki1ddi4o ;
+ON PAD _3kk1f31ke OF _MSYSMENU ACTIVATE POPUP teste
+ON PAD _3kk1f31kf OF _MSYSMENU ACTIVATE POPUP movimento
+ON SELECTION PAD _3kk1f31ki OF _MSYSMENU ;
+	DO _3kk1f31kj ;
 	IN LOCFILE("SEJUR\MENUPRINCIPAL" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENUPRINCIPAL?")
 
 DEFINE POPUP teste MARGIN RELATIVE SHADOW COLOR SCHEME 4
-DEFINE BAR 1 OF teste PROMPT "Profissional"
-DEFINE BAR 2 OF teste PROMPT "Paciente"
-DEFINE BAR 3 OF teste PROMPT "Convênio"
-DEFINE BAR 4 OF teste PROMPT "\-"
-DEFINE BAR 5 OF teste PROMPT "Usuário"
+DEFINE BAR 1 OF teste PROMPT "Grupo/Subgrupo"
+DEFINE BAR 2 OF teste PROMPT "Fabricante"
+DEFINE BAR 3 OF teste PROMPT "\-"
+DEFINE BAR 4 OF teste PROMPT "Usuário"
+ON SELECTION BAR 1 OF teste do form /forms/cadgrupo
+ON SELECTION BAR 2 OF teste do form /forms/cadfabricante
 
 DEFINE POPUP movimento MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF movimento PROMPT "Marcação de Consultas"
@@ -57,16 +58,16 @@ DEFINE BAR 3 OF movimento PROMPT "Localizar Paciente"
 
 *       *********************************************************
 *       *                                                         
-*       * _3KI1DDI4O  ON SELECTION PAD                            
+*       * _3KK1F31KJ  ON SELECTION PAD                            
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
-*       * From Menu:  MENUPRINCIPAL.MPR,            Record:   19  
+*       * From Menu:  MENUPRINCIPAL.MPR,            Record:   18  
 *       * Called By:  ON SELECTION PAD                            
 *       * Prompt:     Sair                                        
 *       * Snippet:    1                                           
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _3ki1ddi4o
+PROCEDURE _3kk1f31kj
 CLEAR EVENTS
