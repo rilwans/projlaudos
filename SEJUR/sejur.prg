@@ -56,7 +56,7 @@ IF wnivel = 0
 	wnivel=9
 ENDIF
 
-wsistema= "clinica"
+wsistema= "sejur"
 wlimpamenu = .F.
 wtemp = "..\TEMPS\"
 Set Sysm To

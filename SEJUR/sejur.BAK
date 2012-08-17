@@ -66,7 +66,7 @@ _Screen.WindowState = 2
 _Screen.Closable = .F.
 _Screen.Icon = "clinica.ico"
 
-_Screen.Caption = "Clinicas"
+_Screen.Caption = "Central de Materiais e Medicamentos - SEJUR"
 _Screen.AddObject('imagem','Figura')  && Adiciona um controle de figura a um formulário
 
 _Screen.imagem.Visible =.T.
