@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 21/08/2012         MENUPRINCIPAL.MPR          16:36:19  
+*       * 21/08/2012         MENUPRINCIPAL.MPR          16:57:09  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -26,20 +26,21 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _3ku0zl9ym OF _MSYSMENU PROMPT "Cadastros" COLOR SCHEME 3 ;
+DEFINE PAD _3ku10c2ez OF _MSYSMENU PROMPT "Cadastros" COLOR SCHEME 3 ;
 	KEY ALT+C, ""
-DEFINE PAD _3ku0zl9yn OF _MSYSMENU PROMPT "Movimento" COLOR SCHEME 3 ;
+DEFINE PAD _3ku10c2f0 OF _MSYSMENU PROMPT "Movimento" COLOR SCHEME 3 ;
 	KEY ALT+M, ""
-DEFINE PAD _3ku0zl9yo OF _MSYSMENU PROMPT "Consultas" COLOR SCHEME 3 ;
+DEFINE PAD _3ku10c2f1 OF _MSYSMENU PROMPT "Consultas" COLOR SCHEME 3 ;
 	KEY ALT+C, ""
-DEFINE PAD _3ku0zl9yp OF _MSYSMENU PROMPT "Relatorios" COLOR SCHEME 3 ;
+DEFINE PAD _3ku10c2f2 OF _MSYSMENU PROMPT "Relatorios" COLOR SCHEME 3 ;
 	KEY ALT+R, ""
-DEFINE PAD _3ku0zl9yq OF _MSYSMENU PROMPT "Sair" COLOR SCHEME 3 ;
+DEFINE PAD _3ku10c2f3 OF _MSYSMENU PROMPT "Sair" COLOR SCHEME 3 ;
 	KEY ALT+S, ""
-ON PAD _3ku0zl9ym OF _MSYSMENU ACTIVATE POPUP teste
-ON PAD _3ku0zl9yn OF _MSYSMENU ACTIVATE POPUP movimento
-ON SELECTION PAD _3ku0zl9yq OF _MSYSMENU ;
-	DO _3ku0zl9yr ;
+ON PAD _3ku10c2ez OF _MSYSMENU ACTIVATE POPUP teste
+ON PAD _3ku10c2f0 OF _MSYSMENU ACTIVATE POPUP movimento
+ON PAD _3ku10c2f1 OF _MSYSMENU ACTIVATE POPUP consultas
+ON SELECTION PAD _3ku10c2f3 OF _MSYSMENU ;
+	DO _3ku10c2f4 ;
 	IN LOCFILE("SEJUR\MENUPRINCIPAL" ,"MPX;MPR|FXP;PRG" ,"WHERE is MENUPRINCIPAL?")
 
 DEFINE POPUP teste MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -64,19 +65,23 @@ DEFINE BAR 2 OF movimento PROMPT "\<Saída"
 ON SELECTION BAR 1 OF movimento do form /forms/entrada
 ON SELECTION BAR 2 OF movimento do form /forms/saida
 
+DEFINE POPUP consultas MARGIN RELATIVE SHADOW COLOR SCHEME 4
+DEFINE BAR 1 OF consultas PROMPT "\<Movimento"
+ON SELECTION BAR 1 OF consultas do form /forms/consmovimento
+
 
 *       *********************************************************
 *       *                                                         
-*       * _3KU0ZL9YR  ON SELECTION PAD                            
+*       * _3KU10C2F4  ON SELECTION PAD                            
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
-*       * From Menu:  MENUPRINCIPAL.MPR,            Record:   21  
+*       * From Menu:  MENUPRINCIPAL.MPR,            Record:   22  
 *       * Called By:  ON SELECTION PAD                            
 *       * Prompt:     Sair                                        
 *       * Snippet:    1                                           
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _3ku0zl9yr
+PROCEDURE _3ku10c2f4
 CLEAR EVENTS
