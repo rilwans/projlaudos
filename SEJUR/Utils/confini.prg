@@ -53,7 +53,7 @@ Set Path To D:\Projetos\SEJUR
 
 Set Century To 19 rollover 30
 
-Set Proc To C:\padua\documentos\sejur\utils\utils
+Set Proc To d:\projetos\sejur\utils\utils
 Public wConecta
 wConecta=0
 
