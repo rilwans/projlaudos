@@ -49,7 +49,7 @@ Set Sysformats On
 Set Decimals To 2
 SET DATE DMY
 
-Public wsistema, wlimpamenu, wtemp
+Public wsistema, wlimpamenu, wtemp,Wnomebusca
 
 
 IF wnivel = 0
@@ -59,6 +59,7 @@ ENDIF
 wsistema= "sejur"
 wlimpamenu = .F.
 wtemp = "..\TEMPS\"
+Wnomebusca=""
 Set Sysm To
 
 _Screen.BackColor = Rgb(192,192,192)
