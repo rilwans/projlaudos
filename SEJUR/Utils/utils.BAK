@@ -1,37 +1,3 @@
-#INCLUDE "..\Utils\HSM.H"
-
-************************************
-FUNCTION IsTag (tcTagName, tcAlias)
-  *-- Recebe um nome de marca e um alias (opcional) como
-  *-- parâmetros e retorna verdadeiro (.T.) se a marca de nome existir no
-  *-- alias. Se nenhum alias for passado, o alias atual é utilizado.
-  LOCAL llIsTag, ;
-        lcTagFound
-
-  IF PARAMETERS() < 2
-    tcAlias = ALIAS()
-  ENDIF
-  
-  IF EMPTY(tcAlias)
-    RETURN .F.
-  ENDIF
-
-  llIsTag = .F.
-  tcTagName = UPPER(ALLTRIM(tcTagName))
-
-  lnTagNum = 1
-  lcTagFound = TAG(lnTagNum, tcAlias)
-  DO WHILE !EMPTY(lcTagFound)
-    IF UPPER(ALLTRIM(lcTagFound)) == tcTagName
-      llIsTag = .T.
-      EXIT
-    ENDIF
-    lnTagNum = lnTagNum + 1
-    lcTagFound = TAG(lnTagNum, tcAlias)
-  ENDDO
-
-  RETURN llIsTag
-ENDFUNC
 
 ************************************
 FUNCTION CorrTexto(pTexto, pTiraAcento)
@@ -76,39 +42,6 @@ FUNCTION CorrTexto(pTexto, pTiraAcento)
 ENDFUNC
 
 ************************************
-FUNCTION Pesquisa(pCampo, pString)
-	*-- Recebe uma o nome do campo pelo qual está ordenado e a 
-	*-- string para pesquisa na view corrente. Retorna o número do ponteiro.
-
-	Local rPos, vAux
-	vAux= reccount()
-	
-	do while .t.
-		rPos= vAux/2
-		goto rPos
-		if pString= left(&pCampo, len(pString))
-		else
-			if pString> left(&pCampo, len(pString))
-				vAux= vAux/2
-			else
-			endif
-		endif
-	enddo
-
-	return rPos
-ENDFUNC
-
-************************************
-FUNCTION Exec(pComando)
-	*-- Executa e trata o comando SQL passado como prametro
-	*--	Mantendo o padrão, retornará 1 em caso de sucesso e -1 se ocorrer algum erro
-
-	vCodErrSQL= sqlexec(wConecta, pComando)
-
-	return
-ENDFUNC
-
-************************************
 FUNCTION VerErro(pParam)
 	*-- Mostra uma mensagem para um possível erro
 	*--	O Parametro quando passado tem que ser do tipo char
@@ -136,7 +69,7 @@ FUNCTION VerErro(pParam)
 
 		do case
 			case at("**", aEA[2])> 0 
-				MessageBox(substr(aEA[2], at("**", aEA[2]) + 2, 500), 48, ;
+				MessageBox(substr(aEA[2], at("**", aEA[2]) + 2, AT('"',substr(aEA[2],at("**", aEA[2]),500))-2), 48, ;
 					"Atenção! (Nível de Classe)")
 			case aEA[1]= 1526 and at("NULL into column ", aEA[2])> 0 
 				MessageBox("Para que o registro seja incluído, o campo" + chr(13) + ;

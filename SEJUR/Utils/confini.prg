@@ -32,26 +32,43 @@ windice1 = Space(20)
 *********************************************************
 Set Fullpath Off
 *********************************************************
+set nulldisplay to ''
+set multilocks on
+set memowidth to 200
+set display to vga25
+set status bar on
 
-Set NullDisplay To ''
-Set Multilocks On
-Set Memowidth To 200
-Set Display To Vga25
-Set Status Bar On
+set nulldisplay to ''
+set memowidth to 200
+set display to vga25
+set status bar on
+SET CENTURY ON
+SET DELETE ON
+SET SAFETY OFF
+SET TALK OFF
+SET NOTIFY OFF
+SET CONFIRM OFF
+SET CURRENCY TO 'R$ '
+SET DATE BRITISH
+SET ESCAPE ON
+SET EXCLUSIVE OFF
+SET SEPARATOR TO "."
+SET POINT TO ","
+SET MULTILOCKS ON
+SET REPROCESS TO AUTOMATIC
+SET CENTURY to 19 ROLLOVER 30
+SET NULLD to ""
+SET SYSFORMATS ON 
+SET DECIMALS TO 2
+SET REPORTBEHAVIOR 90
+SET FULLPATH ON
 
-Set Delete On
-Set Safety Off
-Set Confirm Off
-Set Exclusive On
-Set Escape On
-Set Separator To "."
-Set Point To ","
-Set Multilocks On
+
+*SET CURRENCY TO 'R$ '
+*SET DATE DMY
 
 Set Path To D:\Projetos\SEJUR
 
-
-Set Century To 19 rollover 30
 
 Set Proc To d:\projetos\sejur\utils\utils
 Public wConecta
@@ -61,7 +78,7 @@ vTpConecta= "banco"
 
 
 
-Store SQLConnect("sejur") To wConecta
+Store SQLConnect("sejus") To wConecta
 Clear
 
 

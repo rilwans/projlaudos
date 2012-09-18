@@ -69,7 +69,7 @@ FUNCTION VerErro(pParam)
 
 		do case
 			case at("**", aEA[2])> 0 
-				MessageBox(substr(aEA[2], at("**", aEA[2]) + 2, 500), 48, ;
+				MessageBox(substr(aEA[2], at("**", aEA[2]) + 2, AT('"',substr(aEA[2],at("**", aEA[2]),500))), 48, ;
 					"Atenção! (Nível de Classe)")
 			case aEA[1]= 1526 and at("NULL into column ", aEA[2])> 0 
 				MessageBox("Para que o registro seja incluído, o campo" + chr(13) + ;

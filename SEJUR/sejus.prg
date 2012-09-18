@@ -12,7 +12,7 @@ On Error Do Form \Utils\p_erro With ;
 	ERROR( ), Message( ), Message(1), Program( ), Lineno( )
 
 Public wConecta
-Store SQLConnect("sejur") To wConecta
+Store SQLConnect("sejus") To wConecta
 
 If wConecta> 0
 	= SQLExec(wConecta, "SET LANGUAGE portuguese")
@@ -56,7 +56,7 @@ IF wnivel = 0
 	wnivel=9
 ENDIF
 
-wsistema= "sejur"
+wsistema= "SEJUS"
 wlimpamenu = .F.
 wtemp = "..\TEMPS\"
 Wnomebusca=""
@@ -67,7 +67,7 @@ _Screen.WindowState = 2
 _Screen.Closable = .F.
 _Screen.Icon = "clinica.ico"
 
-_Screen.Caption = "Central de Materiais e Medicamentos - SEJUR"
+_Screen.Caption = "Central de Materiais e Medicamentos - SEJUS"
 _Screen.AddObject('imagem','Figura')  && Adiciona um controle de figura a um formulário
 
 _Screen.imagem.Visible =.T.
