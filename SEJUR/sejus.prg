@@ -1,10 +1,14 @@
 
 
-Public wusuario, wnivel,wacesso,wusermedico,wnmMedico
+Public wusuario, wnivel,wacesso,wusermedico,wnmMedico,wpcadastro,wpcadusu,wpentrada,wpsaida
 wnivel = 0
 wacesso=0
 Wusermedico=0
 wusuario=""
+wpcadastro=.f.
+wpcadusu=.f.
+wpentrada=.f.
+wpsaida=.f.
 Close Databases
 Set Proc To \Utils\Utils
 

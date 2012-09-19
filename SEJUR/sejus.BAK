@@ -1,10 +1,14 @@
 
 
-Public wusuario, wnivel,wacesso,wusermedico,wnmMedico
+Public wusuario, wnivel,wacesso,wusermedico,wnmMedico,wpcadastro,wpcadusu,wpentrada,wpsaida
 wnivel = 0
 wacesso=0
 Wusermedico=0
 wusuario=""
+wpcadastro=.t.
+wpcadusu=.t.
+wpentrada=.t.
+wpsaida=.t.
 Close Databases
 Set Proc To \Utils\Utils
 
@@ -67,7 +71,7 @@ _Screen.WindowState = 2
 _Screen.Closable = .F.
 _Screen.Icon = "clinica.ico"
 
-_Screen.Caption = "Central de Materiais e Medicamentos - SEJUR"
+_Screen.Caption = "Central de Materiais e Medicamentos - SEJUS"
 _Screen.AddObject('imagem','Figura')  && Adiciona um controle de figura a um formulário
 
 _Screen.imagem.Visible =.T.
