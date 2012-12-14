@@ -57,7 +57,7 @@ public class XMLParser {
 		// return XML
 		return xml;
 	}
-	
+
 	/**
 	 * Getting XML DOM element
 	 * @param XML string
@@ -71,7 +71,7 @@ public class XMLParser {
 
 			InputSource is = new InputSource();
 		        is.setCharacterStream(new StringReader(xml));
-		        doc = db.parse(is); 
+		        doc = db.parse(is);
 
 			} catch (ParserConfigurationException e) {
 				Log.e("Error: ", e.getMessage());
@@ -86,7 +86,7 @@ public class XMLParser {
 
 	        return doc;
 	}
-	
+
 	/** Getting node value
 	  * @param elem element
 	  */
@@ -103,14 +103,14 @@ public class XMLParser {
 	     }
 	     return "";
 	 }
-	 
+
 	 /**
 	  * Getting node value
 	  * @param Element node
 	  * @param key string
 	  * */
-	 public String getValue(Element item, String str) {		
-			NodeList n = item.getElementsByTagName(str);		
+	 public String getValue(Element item, String str) {
+			NodeList n = item.getElementsByTagName(str);
 			return this.getElementValue(n.item(0));
 		}
 }

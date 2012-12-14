@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -99,7 +100,8 @@ public class AndroidFocoList extends ListActivity {
 
 		if (atualiza) {
 			atualiza = false;
-			runnable.run();
+			//runnable.run();
+			new Connection().connect();
 		}
 
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -107,7 +109,6 @@ public class AndroidFocoList extends ListActivity {
 			public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 
 				Intent i = new Intent(AndroidFocoList.this, Detalhar.class);
-
 				Oferta oferta = ofertasOrdenadas.get(position);
 
 				Detalhar.oferta = oferta;
@@ -153,9 +154,16 @@ public class AndroidFocoList extends ListActivity {
 	private Runnable runnable = new Runnable() {
 		public void run() {
 			try {
+				Toast.makeText(AndroidFocoList.this, "Aguarde !!", Toast.LENGTH_SHORT).show();
+				//StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+				//StrictMode.setThreadPolicy(policy);
+
 				ofertas = new ArrayList<Oferta>();
+
 				XMLParser parser = new XMLParser();
+
 				String xml = parser.getXmlFromUrl(URL); // getting XML
+
 				Document doc = parser.getDomElement(xml.replace("'", "")); // getting
 																			// DOM
 																			// element
@@ -174,7 +182,13 @@ public class AndroidFocoList extends ListActivity {
 					oferta.setIMAGEM(parser.getValue(e, IMAGEM));
 					oferta.setPRECODESCONTO(parser.getValue(e, PRECODESCONTO));
 					oferta.setPRECOTOTAL(parser.getValue(e, PRECOTOTAL));
-					oferta.setQTDCOMPRADOS(parser.getValue(e, QTDCOMPRADOS));
+
+					String qtd = parser.getValue(e, QTDCOMPRADOS);
+					if (qtd.equals(""))
+						oferta.setQTDCOMPRADOS("0");
+					else
+						oferta.setQTDCOMPRADOS(qtd);
+
 					oferta.setSITE(parser.getValue(e, SITE).trim());
 					oferta.setTITULO(parser.getValue(e, TITULO));
 
@@ -188,6 +202,8 @@ public class AndroidFocoList extends ListActivity {
 			} catch (Exception e) {
 
 				Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(AndroidFocoList.this,e.getMessage(),
+				// Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -312,6 +328,25 @@ public class AndroidFocoList extends ListActivity {
 		}
 
 		return maps;
+	}
+
+	private class Connection extends AsyncTask {
+
+		@Override
+		protected Object doInBackground(Object... arg0) {
+			connect();
+			return null;
+		}
+
+
+
+	private void connect() {
+		try {
+			runnable.run();
+		} catch (Exception e) {
+
+		}
+	}
 	}
 
 }
