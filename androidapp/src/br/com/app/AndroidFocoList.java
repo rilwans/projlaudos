@@ -1,15 +1,25 @@
 package br.com.app;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +56,8 @@ public class AndroidFocoList extends ListActivity {
 	static boolean atualiza = true;
 
 	private ListView list;
+
+	private String xml;
 
 	private int opcaoOrdena = 0;
 
@@ -101,7 +113,56 @@ public class AndroidFocoList extends ListActivity {
 		if (atualiza) {
 			atualiza = false;
 			//runnable.run();
-			new Connection().connect();
+			Processo processo = new Processo(this);
+	        processo.execute();
+		}
+		try {
+
+
+			ofertas = new ArrayList<Oferta>();
+
+			XMLParser parser = new XMLParser();
+
+			Document doc = parser.getDomElement(xml.replace("'", "")); // getting
+																		// DOM
+																		// element
+
+			NodeList nl = doc.getElementsByTagName(OFERTA);
+			// looping through all item nodes <item>
+			for (int i = 0; i < nl.getLength(); i++) {
+
+				// creating new HashMap
+				Element e = (Element) nl.item(i);
+				// adding each child node to HashMap key => value
+				Oferta oferta = new Oferta();
+				oferta.setATIVA(parser.getValue(e, ATIVA));
+				oferta.setDESCONTO(parser.getValue(e, DESCONTO));
+				oferta.setHREF(parser.getValue(e, HREF));
+				oferta.setIMAGEM(parser.getValue(e, IMAGEM));
+				oferta.setPRECODESCONTO(parser.getValue(e, PRECODESCONTO));
+				oferta.setPRECOTOTAL(parser.getValue(e, PRECOTOTAL));
+
+				String qtd = parser.getValue(e, QTDCOMPRADOS);
+				if (qtd.equals(""))
+					oferta.setQTDCOMPRADOS("0");
+				else
+					oferta.setQTDCOMPRADOS(qtd);
+
+				oferta.setSITE(parser.getValue(e, SITE).trim());
+				oferta.setTITULO(parser.getValue(e, TITULO));
+
+				ofertas.add(oferta);
+			}
+
+			criaAdapter(opcaoOrdena);
+
+			meuAdapter.notifyDataSetChanged();
+			list.setAdapter(meuAdapter);
+		} catch (Exception e) {
+
+			Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(AndroidFocoList.this,e.getMessage(),
+			// Toast.LENGTH_SHORT).show();
 		}
 
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -125,7 +186,7 @@ public class AndroidFocoList extends ListActivity {
 		atualizaBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				runnable.run();
+
 				Toast.makeText(AndroidFocoList.this, "Ofertas Atualizadas!!", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -151,62 +212,7 @@ public class AndroidFocoList extends ListActivity {
 
 	}
 
-	private Runnable runnable = new Runnable() {
-		public void run() {
-			try {
-				Toast.makeText(AndroidFocoList.this, "Aguarde !!", Toast.LENGTH_SHORT).show();
-				//StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-				//StrictMode.setThreadPolicy(policy);
 
-				ofertas = new ArrayList<Oferta>();
-
-				XMLParser parser = new XMLParser();
-
-				String xml = parser.getXmlFromUrl(URL); // getting XML
-
-				Document doc = parser.getDomElement(xml.replace("'", "")); // getting
-																			// DOM
-																			// element
-
-				NodeList nl = doc.getElementsByTagName(OFERTA);
-				// looping through all item nodes <item>
-				for (int i = 0; i < nl.getLength(); i++) {
-
-					// creating new HashMap
-					Element e = (Element) nl.item(i);
-					// adding each child node to HashMap key => value
-					Oferta oferta = new Oferta();
-					oferta.setATIVA(parser.getValue(e, ATIVA));
-					oferta.setDESCONTO(parser.getValue(e, DESCONTO));
-					oferta.setHREF(parser.getValue(e, HREF));
-					oferta.setIMAGEM(parser.getValue(e, IMAGEM));
-					oferta.setPRECODESCONTO(parser.getValue(e, PRECODESCONTO));
-					oferta.setPRECOTOTAL(parser.getValue(e, PRECOTOTAL));
-
-					String qtd = parser.getValue(e, QTDCOMPRADOS);
-					if (qtd.equals(""))
-						oferta.setQTDCOMPRADOS("0");
-					else
-						oferta.setQTDCOMPRADOS(qtd);
-
-					oferta.setSITE(parser.getValue(e, SITE).trim());
-					oferta.setTITULO(parser.getValue(e, TITULO));
-
-					ofertas.add(oferta);
-				}
-
-				criaAdapter(opcaoOrdena);
-
-				meuAdapter.notifyDataSetChanged();
-				list.setAdapter(meuAdapter);
-			} catch (Exception e) {
-
-				Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
-				// Toast.makeText(AndroidFocoList.this,e.getMessage(),
-				// Toast.LENGTH_SHORT).show();
-			}
-		}
-	};
 
 	public void criaAdapter(int chave) {
 		meuAdapter = new MyAdapter(this, getMap(chave), R.layout.list_view,
@@ -330,23 +336,56 @@ public class AndroidFocoList extends ListActivity {
 		return maps;
 	}
 
-	private class Connection extends AsyncTask {
+	 public class Processo extends AsyncTask<Integer, String, Integer> {
 
-		@Override
-		protected Object doInBackground(Object... arg0) {
-			connect();
-			return null;
-		}
+	        private ProgressDialog progress;
+	        private Context context;
 
+	        public Processo(Context context) {
+	            this.context = context;
+	        }
 
+	        @Override
+	        protected void onPreExecute() {
+	            //Cria novo um ProgressDialogo e exibe
+	            progress = new ProgressDialog(context);
+	            progress.setMessage("Aguarde...");
+	            progress.show();
+	        }
 
-	private void connect() {
-		try {
-			runnable.run();
-		} catch (Exception e) {
+	        @Override
+	        protected Integer doInBackground(Integer... paramss) {
 
-		}
-	}
-	}
+	        	try {
+
+	    			DefaultHttpClient httpClient = new DefaultHttpClient();
+	    			HttpPost httpPost = new HttpPost(URL);
+
+	    			HttpResponse httpResponse = httpClient.execute(httpPost);
+	    			HttpEntity httpEntity = httpResponse.getEntity();
+	    			xml = EntityUtils.toString(httpEntity);
+
+	    		} catch (UnsupportedEncodingException e) {
+	    			e.printStackTrace();
+	    		} catch (ClientProtocolException e) {
+	    			e.printStackTrace();
+	    		} catch (IOException e) {
+	    			e.printStackTrace();
+	    		}
+	            return 1;
+	        }
+
+	        @Override
+	        protected void onPostExecute(Integer result) {
+	            //Cancela progressDialogo
+	            progress.dismiss();
+	        }
+
+	        @Override
+	        protected void onProgressUpdate(String... values) {
+	            //Atualiza mensagem
+	            progress.setMessage(values[0]);
+	        }
+	    }
 
 }
