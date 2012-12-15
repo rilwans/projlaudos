@@ -91,6 +91,8 @@ public class AndroidFocoList extends ListActivity {
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
 
+		ofertas = new ArrayList<Oferta>();
+		
 		list = (ListView) findViewById(android.R.id.list);
 
 		spOrdecacao = (Spinner) findViewById(R.id.spOrdenacao);
@@ -112,15 +114,227 @@ public class AndroidFocoList extends ListActivity {
 
 		if (atualiza) {
 			atualiza = false;
-			//runnable.run();
+			// runnable.run();
 			Processo processo = new Processo(this);
-	        processo.execute();
+			processo.execute();
 		}
-		try {
+		
 
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 
-			ofertas = new ArrayList<Oferta>();
+				Intent i = new Intent(AndroidFocoList.this, Detalhar.class);
+				Oferta oferta = ofertasOrdenadas.get(position);
 
+				Detalhar.oferta = oferta;
+
+				// Toast.makeText(AndroidFocoList.this, oferta.getTITULO(),
+				// Toast.LENGTH_SHORT).show();
+
+				startActivity(i);
+
+			}
+		});
+
+		Button atualizaBtn = (Button) findViewById(R.id.atualiza);
+		atualizaBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Processo pro = new Processo(AndroidFocoList.this);
+				pro.execute();
+			}
+		});
+
+		spOrdecacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+				opcaoOrdena = i;
+				criaAdapter(opcaoOrdena);
+
+				meuAdapter.notifyDataSetChanged();
+				list.setAdapter(meuAdapter);
+			}
+
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void onNothingSelected(AdapterView arg0) {
+				// do something else
+			}
+		});
+
+	}
+
+	public void criaAdapter(int chave) {
+		meuAdapter = new MyAdapter(this, getMap(chave), R.layout.list_view, new String[] { TITULO, PRECODESCONTO,
+				QTDCOMPRADOS, ATIVA, SITE }, new int[] { R.id.titulo, R.id.precodesconto, R.id.qtdcomprados,
+				R.id.ativa, R.id.site });
+	}
+
+	public ArrayList<HashMap<String, String>> getMap(int chave) {
+
+		ArrayList<HashMap<String, String>> maps = new ArrayList<HashMap<String, String>>();
+
+		ofertasOrdenadas = ofertas;
+
+		if (chave == 1) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlDesconto() < p2.getVlDesconto() ? -1 : p1.getVlDesconto() > p2.getVlDesconto() ? +1
+							: 0;
+				}
+			});
+		}
+		if (chave == 2) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlDesconto() > p2.getVlDesconto() ? -1 : p1.getVlDesconto() < p2.getVlDesconto() ? +1
+							: 0;
+				}
+			});
+		}
+		if (chave == 3) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlPercDesconto() < p2.getVlPercDesconto() ? -1 : p1.getVlPercDesconto() > p2
+							.getVlPercDesconto() ? +1 : 0;
+				}
+			});
+		}
+		if (chave == 4) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlPercDesconto() > p2.getVlPercDesconto() ? -1 : p1.getVlPercDesconto() < p2
+							.getVlPercDesconto() ? +1 : 0;
+				}
+			});
+		}
+		if (chave == 5) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return Integer.parseInt(p1.getQTDCOMPRADOS()) > Integer.parseInt(p2.getQTDCOMPRADOS()) ? -1
+							: Integer.parseInt(p1.getQTDCOMPRADOS()) < Integer.parseInt(p2.getQTDCOMPRADOS()) ? +1 : 0;
+				}
+			});
+		}
+
+		if (chave == 6) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return Integer.parseInt(p1.getQTDCOMPRADOS()) < Integer.parseInt(p2.getQTDCOMPRADOS()) ? -1
+							: Integer.parseInt(p1.getQTDCOMPRADOS()) > Integer.parseInt(p2.getQTDCOMPRADOS()) ? +1 : 0;
+				}
+			});
+		}
+
+		if (chave == 7) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return p1.getVlAtivo() > p2.getVlAtivo() ? -1 : p1.getVlAtivo() < p2.getVlAtivo() ? +1 : 0;
+				}
+			});
+
+		}
+
+		if (chave == 8) {
+
+			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
+				public int compare(final Oferta o1, final Oferta o2) {
+					Oferta p1 = (Oferta) o1;
+					Oferta p2 = (Oferta) o2;
+					return Integer.parseInt(p1.getSITE()) < Integer.parseInt(p2.getSITE()) ? -1 : Integer.parseInt(p1
+							.getSITE()) > Integer.parseInt(p2.getSITE()) ? +1 : 0;
+				}
+			});
+		}
+
+		for (Oferta o : ofertasOrdenadas) {
+			HashMap<String, String> map = new HashMap<String, String>();
+
+			map.put(SITE, o.getSITE());
+			map.put(TITULO, o.getTituloResumo());
+			map.put(HREF, o.getHREF());
+			map.put(IMAGEM, o.getIMAGEM());
+			map.put(PRECOTOTAL, "R$ " + o.getPRECOTOTAL());
+			map.put(PRECODESCONTO, "R$ " + o.getPRECODESCONTO());
+			map.put(DESCONTO, o.getDESCONTO());
+			map.put(QTDCOMPRADOS, o.getQTDCOMPRADOS());
+			map.put(ATIVA, o.getATIVA());
+
+			// adding HashList to ArrayList
+
+			maps.add(map);
+
+		}
+
+		return maps;
+	}
+
+	public class Processo extends AsyncTask<Integer, String, Integer> {
+
+		private ProgressDialog progress;
+		private Context context;
+
+		public Processo(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// Cria novo um ProgressDialogo e exibe
+			progress = new ProgressDialog(context);
+			progress.setMessage("Aguarde... Atualizando ofertas...");
+			progress.show();
+		}
+
+		@Override
+		protected Integer doInBackground(Integer... paramss) {
+
+			try {
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost(URL);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				xml = EntityUtils.toString(httpEntity);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return 1;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			// Cancela progressDialogo
 			XMLParser parser = new XMLParser();
 
 			Document doc = parser.getDomElement(xml.replace("'", "")); // getting
@@ -158,234 +372,15 @@ public class AndroidFocoList extends ListActivity {
 
 			meuAdapter.notifyDataSetChanged();
 			list.setAdapter(meuAdapter);
-		} catch (Exception e) {
 
-			Toast.makeText(AndroidFocoList.this, "Não foi possivel receber lista de ofertas", Toast.LENGTH_SHORT).show();
-			// Toast.makeText(AndroidFocoList.this,e.getMessage(),
-			// Toast.LENGTH_SHORT).show();
+			progress.dismiss();
 		}
 
-		list.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-
-				Intent i = new Intent(AndroidFocoList.this, Detalhar.class);
-				Oferta oferta = ofertasOrdenadas.get(position);
-
-				Detalhar.oferta = oferta;
-
-				// Toast.makeText(AndroidFocoList.this, oferta.getTITULO(),
-				// Toast.LENGTH_SHORT).show();
-
-				startActivity(i);
-
-			}
-		});
-
-		Button atualizaBtn = (Button) findViewById(R.id.atualiza);
-		atualizaBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				Toast.makeText(AndroidFocoList.this, "Ofertas Atualizadas!!", Toast.LENGTH_SHORT).show();
-			}
-		});
-
-		spOrdecacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
-				opcaoOrdena = i;
-				criaAdapter(opcaoOrdena);
-
-				meuAdapter.notifyDataSetChanged();
-				list.setAdapter(meuAdapter);
-			}
-
-			@SuppressWarnings("rawtypes")
-			@Override
-			public void onNothingSelected(AdapterView arg0) {
-				// do something else
-			}
-		});
-
+		@Override
+		protected void onProgressUpdate(String... values) {
+			// Atualiza mensagem
+			progress.setMessage(values[0]);
+		}
 	}
-
-
-
-	public void criaAdapter(int chave) {
-		meuAdapter = new MyAdapter(this, getMap(chave), R.layout.list_view,
-				new String[] { TITULO, PRECODESCONTO, QTDCOMPRADOS, ATIVA, SITE }, new int[] { R.id.titulo, R.id.precodesconto,
-						R.id.qtdcomprados, R.id.ativa, R.id.site });
-	}
-
-	public ArrayList<HashMap<String, String>> getMap(int chave) {
-
-		ArrayList<HashMap<String, String>> maps = new ArrayList<HashMap<String, String>>();
-
-		ofertasOrdenadas = ofertas;
-
-		if (chave == 1) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return p1.getVlDesconto() < p2.getVlDesconto() ? -1 : p1.getVlDesconto() > p2.getVlDesconto() ? +1 : 0;
-				}
-			});
-		}
-		if (chave == 2) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return p1.getVlDesconto() > p2.getVlDesconto() ? -1 : p1.getVlDesconto() < p2.getVlDesconto() ? +1 : 0;
-				}
-			});
-		}
-		if (chave == 3) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return p1.getVlPercDesconto() < p2.getVlPercDesconto() ? -1 : p1.getVlPercDesconto() > p2.getVlPercDesconto() ? +1 : 0;
-				}
-			});
-		}
-		if (chave == 4) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return p1.getVlPercDesconto() > p2.getVlPercDesconto() ? -1 : p1.getVlPercDesconto() < p2.getVlPercDesconto() ? +1 : 0;
-				}
-			});
-		}
-		if (chave == 5) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return Integer.parseInt(p1.getQTDCOMPRADOS()) > Integer.parseInt(p2.getQTDCOMPRADOS()) ? -1 : Integer.parseInt(p1
-							.getQTDCOMPRADOS()) < Integer.parseInt(p2.getQTDCOMPRADOS()) ? +1 : 0;
-				}
-			});
-		}
-
-		if (chave == 6) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return Integer.parseInt(p1.getQTDCOMPRADOS()) < Integer.parseInt(p2.getQTDCOMPRADOS()) ? -1 : Integer.parseInt(p1
-							.getQTDCOMPRADOS()) > Integer.parseInt(p2.getQTDCOMPRADOS()) ? +1 : 0;
-				}
-			});
-		}
-
-		if (chave == 7) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return p1.getVlAtivo() > p2.getVlAtivo() ? -1 : p1.getVlAtivo() < p2.getVlAtivo() ? +1 : 0;
-				}
-			});
-
-		}
-
-		if (chave == 8) {
-
-			Collections.sort(ofertasOrdenadas, new Comparator<Oferta>() {
-				public int compare(final Oferta o1, final Oferta o2) {
-					Oferta p1 = (Oferta) o1;
-					Oferta p2 = (Oferta) o2;
-					return Integer.parseInt(p1.getSITE()) < Integer.parseInt(p2.getSITE()) ? -1 : Integer.parseInt(p1.getSITE()) > Integer
-							.parseInt(p2.getSITE()) ? +1 : 0;
-				}
-			});
-		}
-
-		for (Oferta o : ofertasOrdenadas) {
-			HashMap<String, String> map = new HashMap<String, String>();
-
-			map.put(SITE, o.getSITE());
-			map.put(TITULO, o.getTituloResumo());
-			map.put(HREF, o.getHREF());
-			map.put(IMAGEM, o.getIMAGEM());
-			map.put(PRECOTOTAL, "R$ " + o.getPRECOTOTAL());
-			map.put(PRECODESCONTO, "R$ " + o.getPRECODESCONTO());
-			map.put(DESCONTO, o.getDESCONTO());
-			map.put(QTDCOMPRADOS, o.getQTDCOMPRADOS());
-			map.put(ATIVA, o.getATIVA());
-
-			// adding HashList to ArrayList
-
-			maps.add(map);
-
-		}
-
-		return maps;
-	}
-
-	 public class Processo extends AsyncTask<Integer, String, Integer> {
-
-	        private ProgressDialog progress;
-	        private Context context;
-
-	        public Processo(Context context) {
-	            this.context = context;
-	        }
-
-	        @Override
-	        protected void onPreExecute() {
-	            //Cria novo um ProgressDialogo e exibe
-	            progress = new ProgressDialog(context);
-	            progress.setMessage("Aguarde...");
-	            progress.show();
-	        }
-
-	        @Override
-	        protected Integer doInBackground(Integer... paramss) {
-
-	        	try {
-
-	    			DefaultHttpClient httpClient = new DefaultHttpClient();
-	    			HttpPost httpPost = new HttpPost(URL);
-
-	    			HttpResponse httpResponse = httpClient.execute(httpPost);
-	    			HttpEntity httpEntity = httpResponse.getEntity();
-	    			xml = EntityUtils.toString(httpEntity);
-
-	    		} catch (UnsupportedEncodingException e) {
-	    			e.printStackTrace();
-	    		} catch (ClientProtocolException e) {
-	    			e.printStackTrace();
-	    		} catch (IOException e) {
-	    			e.printStackTrace();
-	    		}
-	            return 1;
-	        }
-
-	        @Override
-	        protected void onPostExecute(Integer result) {
-	            //Cancela progressDialogo
-	            progress.dismiss();
-	        }
-
-	        @Override
-	        protected void onProgressUpdate(String... values) {
-	            //Atualiza mensagem
-	            progress.setMessage(values[0]);
-	        }
-	    }
 
 }
