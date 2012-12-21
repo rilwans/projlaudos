@@ -92,7 +92,7 @@ public class AndroidFocoList extends ListActivity {
 		adView.loadAd(adRequest);
 
 		ofertas = new ArrayList<Oferta>();
-		
+
 		list = (ListView) findViewById(android.R.id.list);
 
 		spOrdecacao = (Spinner) findViewById(R.id.spOrdenacao);
@@ -108,7 +108,7 @@ public class AndroidFocoList extends ListActivity {
 		ordenacao.add("Sites");
 
 		@SuppressWarnings("rawtypes")
-		ArrayAdapter adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ordenacao);
+		ArrayAdapter adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ordenacao);
 
 		spOrdecacao.setAdapter(adp);
 
@@ -118,8 +118,8 @@ public class AndroidFocoList extends ListActivity {
 			Processo processo = new Processo(this);
 			processo.execute();
 		}
-		
 
+		
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
