@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,7 +14,7 @@ import javax.swing.JMenuItem;
 public class Inicio {
 
 	private JFrame frame;
-
+	private JDesktopPane desktop;
 	/**
 	 * Launch the application.
 	 */
@@ -42,38 +43,38 @@ public class Inicio {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Aluno");
 		frame.setBounds(100, 100, 625, 475);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
+		desktop = new JDesktopPane();
+		frame.setContentPane(desktop);
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		JMenu mnCadastro = new JMenu("Cadastro");
 		menuBar.add(mnCadastro);
-		
+
 		JMenuItem mntmAluno = new JMenuItem("Aluno");
 		mntmAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
-				
-				CadAluno cadaluno = new CadAluno();
-				frame.getContentPane().add(cadaluno);
-				cadaluno.setVisible(true);
-				
-			
+
+				chamaALuno();
+
 			}
 		});
 		mnCadastro.add(mntmAluno);
-		
+
 		JMenuItem mntmProfessor = new JMenuItem("Professor");
 		mnCadastro.add(mntmProfessor);
-		
+
 		JMenuItem mntmDisciplina = new JMenuItem("Disciplina");
 		mnCadastro.add(mntmDisciplina);
-		
+
 		JMenuItem mntmCurso = new JMenuItem("Curso");
 		mnCadastro.add(mntmCurso);
-		
+
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.setMaximumSize(new Dimension(100, 100));
 		mntmSair.addActionListener(new ActionListener() {
@@ -81,14 +82,22 @@ public class Inicio {
 				System.exit(0);
 			}
 		});
-		
+
 		JMenuItem mntmMatricula = new JMenuItem("Matricula");
 		mntmMatricula.setMaximumSize(new Dimension(100, 100));
 		menuBar.add(mntmMatricula);
 		menuBar.add(mntmSair);
-		
-		
-		
+
 	}
+
+
+	private void chamaALuno(){
+		CadAluno cadaluno = new CadAluno();
+		cadaluno.setSize(450,300);
+		cadaluno.setVisible(true);
+		cadaluno.setTitle("Aluno");
+		desktop.add(cadaluno);
+	}
+
 
 }
