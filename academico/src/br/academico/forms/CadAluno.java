@@ -1,9 +1,9 @@
 package br.academico.forms;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,39 +20,29 @@ import javax.swing.text.MaskFormatter;
 import br.academico.conexao.Banco;
 
 public class CadAluno extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5812452345019911922L;
 	private JTextField txtnome;
 	private JTextField txtendereco;
 	private JTextField txtCidade;
 	private JTextField txtmae;
 	private JTextField txtcodigo;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbSexo;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbestado;
 	private JFormattedTextField txtCEP;
 	private JFormattedTextField txtcpf;
 
 	private JFormattedTextField txtfone;
 	private JFormattedTextField txtnascimento;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadAluno frame = new CadAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private int idAluno;
 
 	/**
 	 * Create the frame.
-	 *
+	 * 
 	 * @throws ParseException
 	 */
 	public CadAluno() {
@@ -61,7 +51,7 @@ public class CadAluno extends JInternalFrame {
 
 		try {
 			JLabel lblNome = new JLabel("Nome");
-			lblNome.setBounds(41, 44, 80, 14);
+			lblNome.setBounds(25, 41, 96, 14);
 			getContentPane().add(lblNome);
 
 			txtnome = new JTextField("");
@@ -86,7 +76,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtendereco);
 
 			JLabel lblEndereo = new JLabel("Endere\u00E7o");
-			lblEndereo.setBounds(41, 122, 80, 14);
+			lblEndereo.setBounds(25, 119, 96, 14);
 			getContentPane().add(lblEndereo);
 
 			txtCidade = new JTextField();
@@ -95,7 +85,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtCidade);
 
 			JLabel lblCidade = new JLabel("Cidade");
-			lblCidade.setBounds(41, 153, 80, 14);
+			lblCidade.setBounds(25, 150, 96, 14);
 			getContentPane().add(lblCidade);
 
 			JLabel lblEstado = new JLabel("Estado");
@@ -116,7 +106,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(cbestado);
 
 			JLabel lblCep = new JLabel("CEP");
-			lblCep.setBounds(41, 181, 80, 14);
+			lblCep.setBounds(25, 178, 96, 14);
 			getContentPane().add(lblCep);
 
 			MaskFormatter mask;
@@ -138,11 +128,11 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtcpf);
 
 			JLabel lblCpf = new JLabel("CPF");
-			lblCpf.setBounds(249, 181, 46, 14);
+			lblCpf.setBounds(249, 178, 46, 14);
 			getContentPane().add(lblCpf);
 
 			JLabel lblNomeMe = new JLabel("Nome M\u00E3e");
-			lblNomeMe.setBounds(41, 69, 80, 14);
+			lblNomeMe.setBounds(25, 66, 96, 14);
 			getContentPane().add(lblNomeMe);
 
 			txtmae = new JTextField();
@@ -151,7 +141,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtmae);
 
 			JLabel lblFone = new JLabel("Fone");
-			lblFone.setBounds(249, 94, 46, 14);
+			lblFone.setBounds(249, 91, 46, 14);
 			getContentPane().add(lblFone);
 
 			mask = new MaskFormatter("(##) ####-####");
@@ -163,12 +153,11 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtfone);
 
 			JLabel lblDtNascimento = new JLabel("Dt Nascimento");
-			lblDtNascimento.setBounds(41, 95, 80, 14);
+			lblDtNascimento.setBounds(25, 92, 96, 14);
 			getContentPane().add(lblDtNascimento);
 
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			mask = new MaskFormatter("##/##/####");
-			format.setLenient(false);
 			mask.setAllowsInvalid(false);
 			mask.setOverwriteMode(true);
 
@@ -178,7 +167,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(txtnascimento);
 
 			JLabel lblSexo = new JLabel("Sexo");
-			lblSexo.setBounds(41, 209, 80, 14);
+			lblSexo.setBounds(25, 209, 96, 14);
 			getContentPane().add(lblSexo);
 
 			cbSexo = new JComboBox();
@@ -191,7 +180,13 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(cbSexo);
 
 			JButton btnLocaliza = new JButton("Localizar");
-			btnLocaliza.setBounds(10, 237, 89, 23);
+			btnLocaliza.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					localizarAluno();
+
+				}
+			});
+			btnLocaliza.setBounds(186, 12, 89, 23);
 			getContentPane().add(btnLocaliza);
 
 			JButton btnsalvar = new JButton("Salvar");
@@ -210,7 +205,7 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(BtnExcluir);
 
 			JLabel lblCodigo = new JLabel("Codigo");
-			lblCodigo.setBounds(41, 19, 80, 14);
+			lblCodigo.setBounds(25, 16, 96, 14);
 			getContentPane().add(lblCodigo);
 
 			txtcodigo = new JTextField();
@@ -218,9 +213,32 @@ public class CadAluno extends JInternalFrame {
 			txtcodigo.setColumns(10);
 			txtcodigo.setBounds(131, 13, 53, 20);
 			getContentPane().add(txtcodigo);
+
+			JButton btnNovo = new JButton("Novo");
+			btnNovo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					idAluno = 0;
+					txtCEP.setText("");
+					txtCEP.setText("");
+					txtCidade.setText("");
+					txtcpf.setText("");
+					txtendereco.setText("");
+					txtfone.setText("");
+					txtnascimento.setText("");
+					txtnome.setText("");
+					txtmae.setText("");
+					txtcodigo.setText("");
+
+				}
+			});
+			btnNovo.setBounds(10, 237, 89, 23);
+			getContentPane().add(btnNovo);
+
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			// // TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -228,41 +246,90 @@ public class CadAluno extends JInternalFrame {
 		this.dispose();
 	}
 
+	public void localizarAluno() {
+
+		LocAluno locAluno = new LocAluno(this);
+
+		this.getDesktopPane().add(locAluno);
+		locAluno.setVisible(true);
+
+	}
+
 	private void salvaAluno() {
 
-		String sql = "INSERT INTO aluno (nmAluno,endereco,cidade,estado,CEP,dtNascimento,CPF,nmMae,"
-				+ "telefone,SEXO) VALUES (? ,? , ? , ? , ? , ? , ? , ? , ? , ? )";
-		Banco banco;
+		if (idAluno == 0) {
+			String sql = "INSERT INTO aluno (nmAluno,endereco,cidade,estado,CEP,dtNascimento,CPF,nmMae,"
+					+ "telefone,SEXO) VALUES (? ,? , ? , ? , ? , ? , ? , ? , ? , ? )";
+			Banco banco;
+			try {
+				banco = new Banco();
+				PreparedStatement ps = banco.getConexao().prepareStatement(sql);
+
+				ps.setString(1, txtnome.getText());
+				ps.setString(2, txtendereco.getText());
+				ps.setString(3, txtCidade.getText());
+				ps.setString(4, (String) cbestado.getSelectedItem());
+				ps.setString(5, txtCEP.getValue().toString());
+
+				Date data = new SimpleDateFormat("dd/MM/yyyy").parse(txtnascimento.getText());
+				String dataBanco = new SimpleDateFormat("yyyy-MM-dd").format(data);
+
+				ps.setString(6, dataBanco);
+				ps.setString(7, txtcpf.getValue().toString());
+				ps.setString(8, txtmae.getText());
+				ps.setString(9, txtfone.getValue().toString());
+				ps.setString(10, (String) cbSexo.getSelectedItem().toString().substring(0, 1));
+
+				ps.executeUpdate();
+
+				ps.close();
+
+				JOptionPane.showMessageDialog(null, "Dados Salvos com sucesso");
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+
+		}
+
+	}
+
+	/**
+	 * @return the idAluno
+	 */
+	public int getIdAluno() {
+		return idAluno;
+	}
+
+	/**
+	 * @param idAluno
+	 *            the idAluno to set
+	 */
+	public void setIdAluno(int idAluno) {
+		this.idAluno = idAluno;
+		this.txtcodigo.setText(String.valueOf(idAluno));
 		try {
-			banco = new Banco();
-			PreparedStatement ps = banco.getConexao().prepareStatement(sql);
+			Banco banco = new Banco();
+			String sql = "select * from aluno where idAluno = " + String.valueOf(idAluno);
+			ResultSet rs = banco.getStatement().executeQuery(sql);
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			while (rs.next()) {
+				txtCEP.setText(rs.getString("CEP"));
+				txtCidade.setText(rs.getString("Cidade"));
+				txtcpf.setText(rs.getString("cpf"));
+				txtendereco.setText(rs.getString("endereco"));
+				txtfone.setText(rs.getString("telefone"));
+				txtnascimento.setText(format.format(rs.getDate("CEP")));
+				txtnome.setText(rs.getString("nmAluno"));
+				txtmae.setText(rs.getString("nmMae"));
 
-			ps.setString(1, txtnome.getText());
-			ps.setString(2, txtendereco.getText());
-			ps.setString(3, txtCidade.getText());
-			ps.setString(4, (String) cbestado.getSelectedItem());
-			ps.setString(5, txtCEP.getValue().toString());
-
-			Date data = new SimpleDateFormat("dd/MM/yyyy").parse(txtnascimento
-					.getText());
-			String dataBanco = new SimpleDateFormat("yyyy-MM-dd").format(data);
-
-			ps.setString(6, dataBanco);
-			ps.setString(7, txtcpf.getValue().toString());
-			ps.setString(8, txtmae.getText());
-			ps.setString(9, txtfone.getValue().toString());
-			ps.setString(10, (String) cbSexo.getSelectedItem().toString().substring(0, 1));
-
-			ps.executeUpdate();
-
-			ps.close();
-
-			JOptionPane.showMessageDialog(null,"Dados Salvos com sucesso");
-
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+
 }

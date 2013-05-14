@@ -2,6 +2,7 @@ package br.academico.forms;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,8 +14,9 @@ import javax.swing.JMenuItem;
 
 public class Inicio {
 
-	private JFrame frame;
-	private JDesktopPane desktop;
+	public JFrame frame;
+	public JDesktopPane desktop;
+
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +50,7 @@ public class Inicio {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		desktop = new JDesktopPane();
+		desktop.setBackground(SystemColor.inactiveCaption);
 		frame.setContentPane(desktop);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -90,14 +93,12 @@ public class Inicio {
 
 	}
 
-
-	private void chamaALuno(){
+	private void chamaALuno() {
 		CadAluno cadaluno = new CadAluno();
-		cadaluno.setSize(450,300);
+		cadaluno.setSize(450, 300);
 		cadaluno.setVisible(true);
-		cadaluno.setTitle("Aluno");
+		cadaluno.setTitle("Aluno - CET - A Pioneira no programa de qualidade!!! - Veeeenha!");
 		desktop.add(cadaluno);
 	}
-
 
 }
