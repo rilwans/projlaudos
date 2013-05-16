@@ -2,6 +2,8 @@ package br.academico.forms;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
@@ -21,7 +23,7 @@ import br.academico.conexao.Banco;
 
 public class CadAluno extends JInternalFrame {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5812452345019911922L;
 	private JTextField txtnome;
@@ -42,7 +44,7 @@ public class CadAluno extends JInternalFrame {
 
 	/**
 	 * Create the frame.
-	 * 
+	 *
 	 * @throws ParseException
 	 */
 	public CadAluno() {
@@ -162,6 +164,14 @@ public class CadAluno extends JInternalFrame {
 			mask.setOverwriteMode(true);
 
 			txtnascimento = new JFormattedTextField(format);
+			txtnascimento.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent arg0) {
+
+					validarData(txtnascimento.getText());
+
+				}
+			});
 			mask.install(txtnascimento);
 			txtnascimento.setBounds(131, 89, 83, 20);
 			getContentPane().add(txtnascimento);
@@ -242,6 +252,21 @@ public class CadAluno extends JInternalFrame {
 		}
 	}
 
+	private void validarData(String data) {
+		if (!data.equals("") && !data.equals("  /  /    "))
+
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				sdf.setLenient(false);
+				sdf.parse(data);
+
+			} catch (ParseException x) {
+				JOptionPane.showMessageDialog(null, "Data Invalida", "Atenção",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
+	}
+
 	private void fechar() {
 		this.dispose();
 	}
@@ -271,14 +296,17 @@ public class CadAluno extends JInternalFrame {
 				ps.setString(4, (String) cbestado.getSelectedItem());
 				ps.setString(5, txtCEP.getValue().toString());
 
-				Date data = new SimpleDateFormat("dd/MM/yyyy").parse(txtnascimento.getText());
-				String dataBanco = new SimpleDateFormat("yyyy-MM-dd").format(data);
+				Date data = new SimpleDateFormat("dd/MM/yyyy")
+						.parse(txtnascimento.getText());
+				String dataBanco = new SimpleDateFormat("yyyy-MM-dd")
+						.format(data);
 
 				ps.setString(6, dataBanco);
 				ps.setString(7, txtcpf.getValue().toString());
 				ps.setString(8, txtmae.getText());
 				ps.setString(9, txtfone.getValue().toString());
-				ps.setString(10, (String) cbSexo.getSelectedItem().toString().substring(0, 1));
+				ps.setString(10, (String) cbSexo.getSelectedItem().toString()
+						.substring(0, 1));
 
 				ps.executeUpdate();
 
@@ -312,7 +340,8 @@ public class CadAluno extends JInternalFrame {
 		this.txtcodigo.setText(String.valueOf(idAluno));
 		try {
 			Banco banco = new Banco();
-			String sql = "select * from aluno where idAluno = " + String.valueOf(idAluno);
+			String sql = "select * from aluno where idAluno = "
+					+ String.valueOf(idAluno);
 			ResultSet rs = banco.getStatement().executeQuery(sql);
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			while (rs.next()) {
