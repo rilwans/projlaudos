@@ -110,7 +110,7 @@ public class LocAluno extends JInternalFrame {
 						+ txtLocAluno.getText().trim() + "%' order by nmAluno";
 				DefaultTableModel tbModelo = (DefaultTableModel) tbLocAluno.getModel();
 				tbModelo.setNumRows(0);
-				ResultSet rs = banco.getStatement().executeQuery(sql);
+				ResultSet rs = (ResultSet) banco.getStatement().executeQuery(sql);
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 				while (rs.next()) {
 					tbModelo.addRow(new Object[] { rs.getInt("idAluno"), rs.getString("nmAluno"),

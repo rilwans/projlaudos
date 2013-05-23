@@ -1,29 +1,32 @@
 package br.academico.conexao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Banco {
 
 	private Connection conexao; // Conexão com o servidor de banco de dados
 	private Statement statement; // Declaração para executar os comandos
 
-
-
-	public Banco() throws Exception{
-		String url = "jdbc:mysql://127.0.0.1/academico?user=root&password=root";
+	public Banco() {
+		String url = "jdbc:mysql://127.0.0.1/academico";
 		String usr = "root";
-		String pwd = "root";
+		String pwd = "";
 
-		// Carregar o driver
-		Class.forName("com.mysql.jdbc.Driver");
+		try {
+			// Carregar o driver
+			Class.forName("com.mysql.jdbc.Driver");
 
-		// Conectar com o servidor de banco de dados
-		conexao = DriverManager.getConnection(url, usr, pwd);
+			// Conectar com o servidor de banco de dados
+			conexao = DriverManager.getConnection(url, usr, pwd);
 
-		statement = conexao.createStatement();
+			statement = conexao.createStatement();
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -31,10 +34,8 @@ public class Banco {
 		return conexao;
 	}
 
-
 	public Statement getStatement() {
 		return statement;
 	}
-
 
 }

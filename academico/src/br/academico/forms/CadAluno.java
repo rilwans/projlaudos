@@ -44,7 +44,7 @@ public class CadAluno extends JInternalFrame {
 
 	/**
 	 * Create the frame.
-	 *
+	 * 
 	 * @throws ParseException
 	 */
 	public CadAluno() {
@@ -211,6 +211,11 @@ public class CadAluno extends JInternalFrame {
 			getContentPane().add(btnsalvar);
 
 			JButton BtnExcluir = new JButton("Excluir");
+			BtnExcluir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					excluiAluno();
+				}
+			});
 			BtnExcluir.setBounds(186, 237, 89, 23);
 			getContentPane().add(BtnExcluir);
 
@@ -227,17 +232,7 @@ public class CadAluno extends JInternalFrame {
 			JButton btnNovo = new JButton("Novo");
 			btnNovo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					idAluno = 0;
-					txtCEP.setText("");
-					txtCEP.setText("");
-					txtCidade.setText("");
-					txtcpf.setText("");
-					txtendereco.setText("");
-					txtfone.setText("");
-					txtnascimento.setText("");
-					txtnome.setText("");
-					txtmae.setText("");
-					txtcodigo.setText("");
+					novoAluno();
 
 				}
 			});
@@ -261,10 +256,51 @@ public class CadAluno extends JInternalFrame {
 				sdf.parse(data);
 
 			} catch (ParseException x) {
-				JOptionPane.showMessageDialog(null, "Data Invalida", "Atenção",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Data Invalida", "Atenção", JOptionPane.ERROR_MESSAGE);
 			}
 
+	}
+	
+	private void novoAluno(){
+		idAluno = 0;
+		txtCEP.setText("");
+		txtCEP.setText("");
+		txtCidade.setText("");
+		txtcpf.setText("");
+		txtendereco.setText("");
+		txtfone.setText("");
+		txtnascimento.setText("");
+		txtnome.setText("");
+		txtmae.setText("");
+		txtcodigo.setText("");
+	}
+	
+	private void excluiAluno(){
+		String sql = "delete from aluno where idAluno=?";
+		Banco banco;
+		try {
+			banco = new Banco();
+			PreparedStatement ps = banco.getConexao().prepareStatement(sql);
+
+			ps.setInt(1, idAluno);
+
+			ps.executeUpdate();
+
+			ps.close();
+
+			novoAluno();
+			
+			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso");
+
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		
+		
 	}
 
 	private void fechar() {
@@ -296,17 +332,51 @@ public class CadAluno extends JInternalFrame {
 				ps.setString(4, (String) cbestado.getSelectedItem());
 				ps.setString(5, txtCEP.getValue().toString());
 
-				Date data = new SimpleDateFormat("dd/MM/yyyy")
-						.parse(txtnascimento.getText());
-				String dataBanco = new SimpleDateFormat("yyyy-MM-dd")
-						.format(data);
+				Date data = new SimpleDateFormat("dd/MM/yyyy").parse(txtnascimento.getText());
+				String dataBanco = new SimpleDateFormat("yyyy-MM-dd").format(data);
 
 				ps.setString(6, dataBanco);
 				ps.setString(7, txtcpf.getValue().toString());
 				ps.setString(8, txtmae.getText());
 				ps.setString(9, txtfone.getValue().toString());
-				ps.setString(10, (String) cbSexo.getSelectedItem().toString()
-						.substring(0, 1));
+				ps.setString(10, (String) cbSexo.getSelectedItem().toString().substring(0, 1));
+
+				ps.executeUpdate();
+
+				ps.close();
+
+				novoAluno();
+				
+				JOptionPane.showMessageDialog(null, "Dados Salvos com sucesso");
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			String sql = "update aluno set nmAluno=?,endereco=?,cidade=?,estado=?,CEP=?,dtNascimento=?,CPF=?,nmMae=?,"
+					+ "telefone=?,SEXO=? where idAluno=?";
+			Banco banco;
+			try {
+				banco = new Banco();
+				PreparedStatement ps = banco.getConexao().prepareStatement(sql);
+
+				ps.setString(1, txtnome.getText());
+				ps.setString(2, txtendereco.getText());
+				ps.setString(3, txtCidade.getText());
+				ps.setString(4, (String) cbestado.getSelectedItem());
+				System.out.println(txtCEP.getValue().toString());
+				ps.setString(5, txtCEP.getValue().toString());
+
+				Date data = new SimpleDateFormat("dd/MM/yyyy").parse(txtnascimento.getText());
+				String dataBanco = new SimpleDateFormat("yyyy-MM-dd").format(data);
+
+				ps.setString(6, dataBanco);
+				ps.setString(7, txtcpf.getValue().toString());
+				ps.setString(8, txtmae.getText());
+				ps.setString(9, txtfone.getValue().toString());
+				ps.setString(10, (String) cbSexo.getSelectedItem().toString().substring(0, 1));
+				ps.setInt(11, idAluno);
 
 				ps.executeUpdate();
 
@@ -318,10 +388,8 @@ public class CadAluno extends JInternalFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
 
 		}
-
 	}
 
 	/**
@@ -340,18 +408,24 @@ public class CadAluno extends JInternalFrame {
 		this.txtcodigo.setText(String.valueOf(idAluno));
 		try {
 			Banco banco = new Banco();
-			String sql = "select * from aluno where idAluno = "
-					+ String.valueOf(idAluno);
+			String sql = "select * from aluno where idAluno = " + String.valueOf(idAluno);
 			ResultSet rs = banco.getStatement().executeQuery(sql);
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			while (rs.next()) {
-				txtCEP.setText(rs.getString("CEP"));
+				txtCEP.setValue((String) rs.getString("CEP"));
+			
 				txtCidade.setText(rs.getString("Cidade"));
-				txtcpf.setText(rs.getString("cpf"));
+				
+				txtcpf.setValue((String) rs.getString("cpf"));
+				
 				txtendereco.setText(rs.getString("endereco"));
-				txtfone.setText(rs.getString("telefone"));
-				txtnascimento.setText(format.format(rs.getDate("CEP")));
+				
+				txtfone.setValue( (String) rs.getString("telefone"));
+				
+				txtnascimento.setValue((String) format.format(rs.getDate("dtNascimente")));
+				
 				txtnome.setText(rs.getString("nmAluno"));
+				
 				txtmae.setText(rs.getString("nmMae"));
 
 			}
